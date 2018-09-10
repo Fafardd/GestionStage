@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Student'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Internship'), ['controller' => 'Internship', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internship'), ['controller' => 'Internship', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="student index large-9 medium-8 columns content">
@@ -22,6 +24,7 @@
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('other_details') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('notes') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('internship_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -34,7 +37,8 @@
                 <td><?= h($student->phone) ?></td>
                 <td><?= h($student->email) ?></td>
                 <td><?= h($student->other_details) ?></td>
-                <td><?= $this->Number->format($student->notes) ?></td>
+                <td><?= h($student->notes) ?></td>
+                <td><?= $student->has('internship') ? $this->Html->link($student->internship->name, ['controller' => 'Internship', 'action' => 'view', $student->internship->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $student->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $student->id]) ?>

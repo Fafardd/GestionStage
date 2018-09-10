@@ -8,6 +8,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Internship'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Company'), ['controller' => 'Company', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Company', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Student'), ['controller' => 'Student', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Student'), ['controller' => 'Student', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="internship index large-9 medium-8 columns content">
@@ -16,12 +20,14 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('address') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('city') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('province') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('postal_code') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('administrative_region') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('period') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('date_start') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('date_end') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('hours') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('title') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('stage_details') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('active') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('company_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -29,12 +35,14 @@
             <?php foreach ($internship as $internship): ?>
             <tr>
                 <td><?= $this->Number->format($internship->id) ?></td>
-                <td><?= h($internship->name) ?></td>
-                <td><?= h($internship->address) ?></td>
-                <td><?= h($internship->city) ?></td>
-                <td><?= h($internship->province) ?></td>
-                <td><?= h($internship->postal_code) ?></td>
-                <td><?= h($internship->administrative_region) ?></td>
+                <td><?= h($internship->period) ?></td>
+                <td><?= h($internship->date_start) ?></td>
+                <td><?= h($internship->date_end) ?></td>
+                <td><?= $this->Number->format($internship->hours) ?></td>
+                <td><?= h($internship->title) ?></td>
+                <td><?= h($internship->stage_details) ?></td>
+                <td><?= $this->Number->format($internship->active) ?></td>
+                <td><?= $internship->has('company') ? $this->Html->link($internship->company->name, ['controller' => 'Company', 'action' => 'view', $internship->company->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $internship->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internship->id]) ?>

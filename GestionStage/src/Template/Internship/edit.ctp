@@ -14,6 +14,10 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Internship'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Company'), ['controller' => 'Company', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Company', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Student'), ['controller' => 'Student', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Student'), ['controller' => 'Student', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="internship form large-9 medium-8 columns content">
@@ -21,12 +25,14 @@
     <fieldset>
         <legend><?= __('Edit Internship') ?></legend>
         <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('address');
-            echo $this->Form->control('city');
-            echo $this->Form->control('province');
-            echo $this->Form->control('postal_code');
-            echo $this->Form->control('administrative_region');
+            echo $this->Form->control('period');
+            echo $this->Form->control('date_start');
+            echo $this->Form->control('date_end');
+            echo $this->Form->control('hours');
+            echo $this->Form->control('title');
+            echo $this->Form->control('stage_details');
+            echo $this->Form->control('active');
+            echo $this->Form->control('company_id', ['options' => $company]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

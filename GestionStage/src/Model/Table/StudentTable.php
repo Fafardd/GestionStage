@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Student Model
  *
+ * @property \App\Model\Table\InternshipTable|\Cake\ORM\Association\BelongsTo $Internship
+ *
  * @method \App\Model\Entity\Student get($primaryKey, $options = [])
  * @method \App\Model\Entity\Student newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Student[] newEntities(array $data, array $options = [])
@@ -34,6 +36,11 @@ class StudentTable extends Table
         $this->setTable('student');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Internship', [
+            'foreignKey' => 'internship_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -78,7 +85,8 @@ class StudentTable extends Table
             ->notEmpty('other_details');
 
         $validator
-            ->integer('notes')
+            ->scalar('notes')
+            ->maxLength('notes', 255)
             ->requirePresence('notes', 'create')
             ->notEmpty('notes');
 
@@ -95,6 +103,7 @@ class StudentTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['internship_id'], 'Internship'));
 
         return $rules;
     }

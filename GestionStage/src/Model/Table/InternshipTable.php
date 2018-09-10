@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Internship Model
  *
+ * @property \App\Model\Table\CompanyTable|\Cake\ORM\Association\BelongsTo $Company
+ * @property \App\Model\Table\StudentTable|\Cake\ORM\Association\HasMany $Student
+ *
  * @method \App\Model\Entity\Internship get($primaryKey, $options = [])
  * @method \App\Model\Entity\Internship newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Internship[] newEntities(array $data, array $options = [])
@@ -34,6 +37,14 @@ class InternshipTable extends Table
         $this->setTable('internship');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Company', [
+            'foreignKey' => 'company_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Student', [
+            'foreignKey' => 'internship_id'
+        ]);
     }
 
     /**
@@ -49,41 +60,56 @@ class InternshipTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->scalar('period')
+            ->maxLength('period', 255)
+            ->requirePresence('period', 'create')
+            ->notEmpty('period');
 
         $validator
-            ->scalar('address')
-            ->maxLength('address', 255)
-            ->requirePresence('address', 'create')
-            ->notEmpty('address');
+            ->date('date_start')
+            ->requirePresence('date_start', 'create')
+            ->notEmpty('date_start');
 
         $validator
-            ->scalar('city')
-            ->maxLength('city', 255)
-            ->requirePresence('city', 'create')
-            ->notEmpty('city');
+            ->date('date_end')
+            ->requirePresence('date_end', 'create')
+            ->notEmpty('date_end');
 
         $validator
-            ->scalar('province')
-            ->maxLength('province', 255)
-            ->requirePresence('province', 'create')
-            ->notEmpty('province');
+            ->integer('hours')
+            ->requirePresence('hours', 'create')
+            ->notEmpty('hours');
 
         $validator
-            ->scalar('postal_code')
-            ->maxLength('postal_code', 6)
-            ->requirePresence('postal_code', 'create')
-            ->notEmpty('postal_code');
+            ->scalar('title')
+            ->maxLength('title', 255)
+            ->requirePresence('title', 'create')
+            ->notEmpty('title');
 
         $validator
-            ->scalar('administrative_region')
-            ->maxLength('administrative_region', 255)
-            ->requirePresence('administrative_region', 'create')
-            ->notEmpty('administrative_region');
+            ->scalar('stage_details')
+            ->maxLength('stage_details', 255)
+            ->requirePresence('stage_details', 'create')
+            ->notEmpty('stage_details');
+
+        $validator
+            ->requirePresence('active', 'create')
+            ->notEmpty('active');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['company_id'], 'Company'));
+
+        return $rules;
     }
 }

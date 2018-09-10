@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\InternshipTable;
+use App\Model\Table\CompanyTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\InternshipTable Test Case
+ * App\Model\Table\CompanyTable Test Case
  */
-class InternshipTableTest extends TestCase
+class CompanyTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\InternshipTable
+     * @var \App\Model\Table\CompanyTable
      */
-    public $Internship;
+    public $Company;
 
     /**
      * Fixtures
@@ -24,9 +24,8 @@ class InternshipTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.internship',
         'app.company',
-        'app.student'
+        'app.internship'
     ];
 
     /**
@@ -37,8 +36,8 @@ class InternshipTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Internship') ? [] : ['className' => InternshipTable::class];
-        $this->Internship = TableRegistry::getTableLocator()->get('Internship', $config);
+        $config = TableRegistry::getTableLocator()->exists('Company') ? [] : ['className' => CompanyTable::class];
+        $this->Company = TableRegistry::getTableLocator()->get('Company', $config);
     }
 
     /**
@@ -48,7 +47,7 @@ class InternshipTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Internship);
+        unset($this->Company);
 
         parent::tearDown();
     }
@@ -69,16 +68,6 @@ class InternshipTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

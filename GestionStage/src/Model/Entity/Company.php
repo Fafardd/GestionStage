@@ -4,20 +4,20 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Student Entity
+ * Company Entity
  *
  * @property int $id
  * @property string $name
- * @property string $first_name
- * @property string $phone
- * @property string $email
- * @property string $other_details
- * @property string $notes
- * @property int $internship_id
+ * @property string $address
+ * @property string $city
+ * @property string $province
+ * @property string $postal_code
+ * @property string $administrative_region
+ * @property int $active
  *
- * @property \App\Model\Entity\Internship $internship
+ * @property \App\Model\Entity\Internship[] $internship
  */
-class Student extends Entity
+class Company extends Entity
 {
 
     /**
@@ -31,12 +31,12 @@ class Student extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'first_name' => true,
-        'phone' => true,
-        'email' => true,
-        'other_details' => true,
-        'notes' => true,
-        'internship_id' => true,
+        'address' => true,
+        'city' => true,
+        'province' => true,
+        'postal_code' => true,
+        'administrative_region' => true,
+        'active' => true,
         'internship' => true
     ];
 }

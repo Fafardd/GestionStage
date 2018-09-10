@@ -7,12 +7,17 @@ use Cake\ORM\Entity;
  * Internship Entity
  *
  * @property int $id
- * @property string $name
- * @property string $address
- * @property string $city
- * @property string $province
- * @property string $postal_code
- * @property string $administrative_region
+ * @property string $period
+ * @property \Cake\I18n\FrozenDate $date_start
+ * @property \Cake\I18n\FrozenDate $date_end
+ * @property int $hours
+ * @property string $title
+ * @property string $stage_details
+ * @property int $active
+ * @property int $company_id
+ *
+ * @property \App\Model\Entity\Company $company
+ * @property \App\Model\Entity\Student[] $student
  */
 class Internship extends Entity
 {
@@ -27,11 +32,15 @@ class Internship extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'address' => true,
-        'city' => true,
-        'province' => true,
-        'postal_code' => true,
-        'administrative_region' => true
+        'period' => true,
+        'date_start' => true,
+        'date_end' => true,
+        'hours' => true,
+        'title' => true,
+        'stage_details' => true,
+        'active' => true,
+        'company_id' => true,
+        'company' => true,
+        'student' => true
     ];
 }

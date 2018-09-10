@@ -14,6 +14,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Student'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Internship'), ['controller' => 'Internship', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internship'), ['controller' => 'Internship', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="student form large-9 medium-8 columns content">
@@ -27,6 +29,7 @@
             echo $this->Form->control('email');
             echo $this->Form->control('other_details');
             echo $this->Form->control('notes');
+            echo $this->Form->control('internship_id', ['options' => $internship]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
