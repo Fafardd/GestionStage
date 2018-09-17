@@ -16,6 +16,12 @@
         <li><?= $this->Html->link(__('List Internship'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Company'), ['controller' => 'Company', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Company'), ['controller' => 'Company', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Type'), ['controller' => 'Type', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Type'), ['controller' => 'Type', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customerbase'), ['controller' => 'Customerbase', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customerbase'), ['controller' => 'Customerbase', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Environment'), ['controller' => 'Environment', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Environment'), ['controller' => 'Environment', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Student'), ['controller' => 'Student', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Student'), ['controller' => 'Student', 'action' => 'add']) ?></li>
     </ul>
@@ -31,12 +37,11 @@
             echo $this->Form->control('hours');
             echo $this->Form->control('title');
             echo $this->Form->control('stage_details');
-			echo "Active : ";
-            echo $this->Form->checkbox('active', ['required' => false]);
+            echo $this->Form->control('active');
             echo $this->Form->control('company_id', ['options' => $company]);
-            echo $this->Form->control('type');
-            echo $this->Form->control('customer_base');
-            echo $this->Form->control('environment');
+            echo $this->Form->control('type_id', ['options' => $type]);
+            echo $this->Form->control('customerbase_id', ['options' => $customerbase]);
+            echo $this->Form->control('environment_id', ['options' => $environment]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -13,6 +13,12 @@
         <li><?= $this->Html->link(__('New Internship'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Company'), ['controller' => 'Company', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Company'), ['controller' => 'Company', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Type'), ['controller' => 'Type', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Type'), ['controller' => 'Type', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Customerbase'), ['controller' => 'Customerbase', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Customerbase'), ['controller' => 'Customerbase', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Environment'), ['controller' => 'Environment', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Environment'), ['controller' => 'Environment', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Student'), ['controller' => 'Student', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Student'), ['controller' => 'Student', 'action' => 'add']) ?> </li>
     </ul>
@@ -38,15 +44,15 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Type') ?></th>
-            <td><?= h($internship->type) ?></td>
+            <td><?= $internship->has('type') ? $this->Html->link($internship->type->name, ['controller' => 'Type', 'action' => 'view', $internship->type->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Customer Base') ?></th>
-            <td><?= h($internship->customer_base) ?></td>
+            <th scope="row"><?= __('Customerbase') ?></th>
+            <td><?= $internship->has('customerbase') ? $this->Html->link($internship->customerbase->name, ['controller' => 'Customerbase', 'action' => 'view', $internship->customerbase->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Environment') ?></th>
-            <td><?= h($internship->environment) ?></td>
+            <td><?= $internship->has('environment') ? $this->Html->link($internship->environment->name, ['controller' => 'Environment', 'action' => 'view', $internship->environment->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
@@ -69,7 +75,6 @@
             <td><?= h($internship->date_end) ?></td>
         </tr>
     </table>
-	<? echo $this->Form->submit('Poser ma candidature');?>
     <div class="related">
         <h4><?= __('Related Student') ?></h4>
         <?php if (!empty($internship->student)): ?>

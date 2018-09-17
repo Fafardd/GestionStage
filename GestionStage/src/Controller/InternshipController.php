@@ -21,7 +21,7 @@ class InternshipController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Company']
+            'contain' => ['Company', 'Type', 'Customerbase', 'Environment']
         ];
         $internship = $this->paginate($this->Internship);
 
@@ -38,7 +38,7 @@ class InternshipController extends AppController
     public function view($id = null)
     {
         $internship = $this->Internship->get($id, [
-            'contain' => ['Company', 'Student']
+            'contain' => ['Company', 'Type', 'Customerbase', 'Environment', 'Student']
         ]);
 
         $this->set('internship', $internship);
@@ -62,7 +62,10 @@ class InternshipController extends AppController
             $this->Flash->error(__('The internship could not be saved. Please, try again.'));
         }
         $company = $this->Internship->Company->find('list', ['limit' => 200]);
-        $this->set(compact('internship', 'company'));
+        $type = $this->Internship->Type->find('list', ['limit' => 200]);
+        $customerbase = $this->Internship->Customerbase->find('list', ['limit' => 200]);
+        $environment = $this->Internship->Environment->find('list', ['limit' => 200]);
+        $this->set(compact('internship', 'company', 'type', 'customerbase', 'environment'));
     }
 
     /**
@@ -87,7 +90,10 @@ class InternshipController extends AppController
             $this->Flash->error(__('The internship could not be saved. Please, try again.'));
         }
         $company = $this->Internship->Company->find('list', ['limit' => 200]);
-        $this->set(compact('internship', 'company'));
+        $type = $this->Internship->Type->find('list', ['limit' => 200]);
+        $customerbase = $this->Internship->Customerbase->find('list', ['limit' => 200]);
+        $environment = $this->Internship->Environment->find('list', ['limit' => 200]);
+        $this->set(compact('internship', 'company', 'type', 'customerbase', 'environment'));
     }
 
     /**

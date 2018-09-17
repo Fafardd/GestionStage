@@ -15,11 +15,14 @@ use Cake\ORM\Entity;
  * @property string $stage_details
  * @property int $active
  * @property int $company_id
- * @property string $type
- * @property string $customer_base
- * @property string $environment
+ * @property int $type_id
+ * @property int $customerbase_id
+ * @property int $environment_id
  *
  * @property \App\Model\Entity\Company $company
+ * @property \App\Model\Entity\Type $type
+ * @property \App\Model\Entity\Customerbase $customerbase
+ * @property \App\Model\Entity\Environment $environment
  * @property \App\Model\Entity\Student[] $student
  */
 class Internship extends Entity
@@ -43,10 +46,13 @@ class Internship extends Entity
         'stage_details' => true,
         'active' => true,
         'company_id' => true,
-        'type' => true,
-        'customer_base' => true,
-        'environment' => true,
+        'type_id' => true,
+        'customerbase_id' => true,
+        'environment_id' => true,
         'company' => true,
+        'type' => true,
+        'customerbase' => true,
+        'environment' => true,
         'student' => true
     ];
 }

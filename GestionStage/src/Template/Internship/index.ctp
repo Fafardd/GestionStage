@@ -10,6 +10,12 @@
         <li><?= $this->Html->link(__('New Internship'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Company'), ['controller' => 'Company', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Company'), ['controller' => 'Company', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Type'), ['controller' => 'Type', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Type'), ['controller' => 'Type', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customerbase'), ['controller' => 'Customerbase', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customerbase'), ['controller' => 'Customerbase', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Environment'), ['controller' => 'Environment', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Environment'), ['controller' => 'Environment', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Student'), ['controller' => 'Student', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Student'), ['controller' => 'Student', 'action' => 'add']) ?></li>
     </ul>
@@ -28,9 +34,9 @@
                 <th scope="col"><?= $this->Paginator->sort('stage_details') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('company_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('type') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('customer_base') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('environment') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('type_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('customerbase_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('environment_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -46,9 +52,9 @@
                 <td><?= h($internship->stage_details) ?></td>
                 <td><?= $this->Number->format($internship->active) ?></td>
                 <td><?= $internship->has('company') ? $this->Html->link($internship->company->name, ['controller' => 'Company', 'action' => 'view', $internship->company->id]) : '' ?></td>
-                <td><?= h($internship->type) ?></td>
-                <td><?= h($internship->customer_base) ?></td>
-                <td><?= h($internship->environment) ?></td>
+                <td><?= $internship->has('type') ? $this->Html->link($internship->type->name, ['controller' => 'Type', 'action' => 'view', $internship->type->id]) : '' ?></td>
+                <td><?= $internship->has('customerbase') ? $this->Html->link($internship->customerbase->name, ['controller' => 'Customerbase', 'action' => 'view', $internship->customerbase->id]) : '' ?></td>
+                <td><?= $internship->has('environment') ? $this->Html->link($internship->environment->name, ['controller' => 'Environment', 'action' => 'view', $internship->environment->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $internship->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internship->id]) ?>

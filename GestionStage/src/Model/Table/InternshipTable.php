@@ -10,6 +10,9 @@ use Cake\Validation\Validator;
  * Internship Model
  *
  * @property \App\Model\Table\CompanyTable|\Cake\ORM\Association\BelongsTo $Company
+ * @property \App\Model\Table\TypeTable|\Cake\ORM\Association\BelongsTo $Type
+ * @property \App\Model\Table\CustomerbaseTable|\Cake\ORM\Association\BelongsTo $Customerbase
+ * @property \App\Model\Table\EnvironmentTable|\Cake\ORM\Association\BelongsTo $Environment
  * @property \App\Model\Table\StudentTable|\Cake\ORM\Association\HasMany $Student
  *
  * @method \App\Model\Entity\Internship get($primaryKey, $options = [])
@@ -40,6 +43,18 @@ class InternshipTable extends Table
 
         $this->belongsTo('Company', [
             'foreignKey' => 'company_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Type', [
+            'foreignKey' => 'type_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Customerbase', [
+            'foreignKey' => 'customerbase_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsTo('Environment', [
+            'foreignKey' => 'environment_id',
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Student', [
@@ -96,24 +111,6 @@ class InternshipTable extends Table
             ->requirePresence('active', 'create')
             ->notEmpty('active');
 
-        $validator
-            ->scalar('type')
-            ->maxLength('type', 255)
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
-
-        $validator
-            ->scalar('customer_base')
-            ->maxLength('customer_base', 255)
-            ->requirePresence('customer_base', 'create')
-            ->notEmpty('customer_base');
-
-        $validator
-            ->scalar('environment')
-            ->maxLength('environment', 255)
-            ->requirePresence('environment', 'create')
-            ->notEmpty('environment');
-
         return $validator;
     }
 
@@ -127,6 +124,9 @@ class InternshipTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['company_id'], 'Company'));
+        $rules->add($rules->existsIn(['type_id'], 'Type'));
+        $rules->add($rules->existsIn(['customerbase_id'], 'Customerbase'));
+        $rules->add($rules->existsIn(['environment_id'], 'Environment'));
 
         return $rules;
     }

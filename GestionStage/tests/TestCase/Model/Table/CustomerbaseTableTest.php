@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\InternshipTable;
+use App\Model\Table\CustomerbaseTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\InternshipTable Test Case
+ * App\Model\Table\CustomerbaseTable Test Case
  */
-class InternshipTableTest extends TestCase
+class CustomerbaseTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\InternshipTable
+     * @var \App\Model\Table\CustomerbaseTable
      */
-    public $Internship;
+    public $Customerbase;
 
     /**
      * Fixtures
@@ -24,12 +24,8 @@ class InternshipTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.internship',
-        'app.company',
-        'app.type',
         'app.customerbase',
-        'app.environment',
-        'app.student'
+        'app.internship'
     ];
 
     /**
@@ -40,8 +36,8 @@ class InternshipTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::getTableLocator()->exists('Internship') ? [] : ['className' => InternshipTable::class];
-        $this->Internship = TableRegistry::getTableLocator()->get('Internship', $config);
+        $config = TableRegistry::getTableLocator()->exists('Customerbase') ? [] : ['className' => CustomerbaseTable::class];
+        $this->Customerbase = TableRegistry::getTableLocator()->get('Customerbase', $config);
     }
 
     /**
@@ -51,7 +47,7 @@ class InternshipTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Internship);
+        unset($this->Customerbase);
 
         parent::tearDown();
     }
@@ -72,16 +68,6 @@ class InternshipTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
