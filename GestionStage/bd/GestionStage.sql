@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 17 Septembre 2018 à 19:45
+-- Généré le :  Lun 17 Septembre 2018 à 20:12
 -- Version du serveur :  5.6.37
 -- Version de PHP :  7.1.8
 
@@ -82,19 +82,10 @@ CREATE TABLE IF NOT EXISTS `Internship` (
   `stage_details` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `active` tinyint(4) NOT NULL,
   `company_id` int(11) NOT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `customer_base` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `environment` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `type_id` int(11) NOT NULL,
+  `customerbase_id` int(11) NOT NULL,
+  `environment_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Contenu de la table `Internship`
---
-
-INSERT INTO `Internship` (`id`, `period`, `date_start`, `date_end`, `hours`, `title`, `stage_details`, `active`, `company_id`, `type`, `customer_base`, `environment`) VALUES
-(2, 'Hiver 2019', '2018-09-17', '2018-09-17', 44, 'Programmeur Analyste chez IGA', 'Stage en PHP', 0, 2, 'Informatique', 'Service', 'Food'),
-(3, 'Hiver 2019', '2018-09-17', '2018-09-20', 35, 'Réseau stagiere', 'Stage en réseau', 1, 2, 'Informatique', 'Service', 'Food'),
-(4, 'Hiver 2019', '2018-09-17', '2018-09-17', 40, 'fdsafads', 'Stage en PHP', 1, 2, 'Informatique', 'Service', 'Food');
 
 -- --------------------------------------------------------
 
@@ -124,14 +115,15 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `category` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contenu de la table `Users`
 --
 
 INSERT INTO `Users` (`id`, `email`, `password`, `category`) VALUES
-(1, 'kev@hotmail.com', '12345', 1);
+(1, 'kev@hotmail.com', '12345', 1),
+(2, 'admin@admin', 'admin', 3);
 
 --
 -- Index pour les tables exportées
@@ -156,7 +148,10 @@ ALTER TABLE `Internship`
   ADD PRIMARY KEY (`id`),
   ADD KEY `company_id` (`company_id`),
   ADD KEY `company_id_2` (`company_id`),
-  ADD KEY `company_id_3` (`company_id`);
+  ADD KEY `company_id_3` (`company_id`),
+  ADD KEY `environment_id` (`environment_id`),
+  ADD KEY `customerbase_id` (`customerbase_id`),
+  ADD KEY `type_id` (`type_id`);
 
 --
 -- Index pour la table `Student`
@@ -199,7 +194,7 @@ ALTER TABLE `Student`
 -- AUTO_INCREMENT pour la table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --

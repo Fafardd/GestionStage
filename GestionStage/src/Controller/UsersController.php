@@ -20,7 +20,7 @@ class UsersController extends AppController
             $this->Auth->setUser($user);
             return $this->redirect($this->Auth->redirectUrl());
         }
-        $this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
+        $this->Flash->error('Your username or password is incorrect.');
     }
 }
 
