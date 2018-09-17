@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 10 Septembre 2018 à 19:57
+-- Généré le :  Lun 17 Septembre 2018 à 18:27
 -- Version du serveur :  5.6.37
 -- Version de PHP :  7.1.8
 
@@ -19,6 +19,32 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `GestionStage`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Company`
+--
+
+CREATE TABLE IF NOT EXISTS `Company` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `province` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `postal_code` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `administrative_region` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  `phone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `Company`
+--
+
+INSERT INTO `Company` (`id`, `name`, `address`, `city`, `province`, `postal_code`, `administrative_region`, `active`, `phone`, `email`) VALUES
+(2, 'IGA', '123 Rue de la vie', 'Laval', 'QC', 'H7R4H8', 'Montreal', 1, '4505144500', 'test@hot.com');
 
 -- --------------------------------------------------------
 
@@ -48,13 +74,27 @@ CREATE TABLE IF NOT EXISTS `Coordonator` (
 
 CREATE TABLE IF NOT EXISTS `Internship` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `province` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `postal_code` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
-  `administrative_region` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `period` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Hiver 2019',
+  `date_start` date NOT NULL,
+  `date_end` date NOT NULL,
+  `hours` int(2) NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `stage_details` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  `company_id` int(11) NOT NULL,
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `customer_base` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `environment` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `Internship`
+--
+
+INSERT INTO `Internship` (`id`, `period`, `date_start`, `date_end`, `hours`, `title`, `stage_details`, `active`, `company_id`, `type`, `customer_base`, `environment`) VALUES
+(2, 'Hiver 2019', '2018-09-17', '2018-09-17', 40, 'Programmeur Analyste chez IGA', 'Stage en PHP', 1, 2, 'Informatique', 'Service', 'Food'),
+(3, 'Hiver 2019', '2018-09-17', '2018-09-20', 35, 'Réseau stagiere', 'Stage en réseau', 1, 2, 'Informatique', 'Service', 'Food'),
+(4, 'Hiver 2019', '2018-09-17', '2018-09-17', 40, 'fdsafads', 'Stage en PHP', 1, 2, 'Informatique', 'Service', 'Food');
 
 -- --------------------------------------------------------
 
@@ -69,12 +109,19 @@ CREATE TABLE IF NOT EXISTS `Student` (
   `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `other_details` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `notes` int(11) NOT NULL
+  `notes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `internship_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Index pour les tables exportées
 --
+
+--
+-- Index pour la table `Company`
+--
+ALTER TABLE `Company`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `Coordonator`
@@ -86,13 +133,57 @@ ALTER TABLE `Coordonator`
 -- Index pour la table `Internship`
 --
 ALTER TABLE `Internship`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `company_id` (`company_id`),
+  ADD KEY `company_id_2` (`company_id`),
+  ADD KEY `company_id_3` (`company_id`);
 
 --
 -- Index pour la table `Student`
 --
 ALTER TABLE `Student`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `internship_id` (`internship_id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `Company`
+--
+ALTER TABLE `Company`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `Coordonator`
+--
+ALTER TABLE `Coordonator`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `Internship`
+--
+ALTER TABLE `Internship`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `Student`
+--
+ALTER TABLE `Student`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `Internship`
+--
+ALTER TABLE `Internship`
+  ADD CONSTRAINT `gdsgfsdg` FOREIGN KEY (`company_id`) REFERENCES `Company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Student`
+--
+ALTER TABLE `Student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`internship_id`) REFERENCES `Internship` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
