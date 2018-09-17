@@ -69,6 +69,7 @@
             <td><?= h($internship->date_end) ?></td>
         </tr>
     </table>
+	<? echo $this->Form->submit('Poser ma candidature');?>
     <div class="related">
         <h4><?= __('Related Student') ?></h4>
         <?php if (!empty($internship->student)): ?>

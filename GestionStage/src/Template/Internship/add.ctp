@@ -26,7 +26,7 @@
             echo $this->Form->control('title');
             echo $this->Form->control('stage_details');
 			echo "Active : ";
-            echo $this->Form->checkbox('active');
+            echo $this->Form->checkbox('active', ['required' => false]);
             echo $this->Form->control('company_id', ['options' => $company]);
             echo $this->Form->control('type');
             echo $this->Form->control('customer_base');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 17 Septembre 2018 à 18:27
+-- Généré le :  Lun 17 Septembre 2018 à 19:45
 -- Version du serveur :  5.6.37
 -- Version de PHP :  7.1.8
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `Internship` (
 --
 
 INSERT INTO `Internship` (`id`, `period`, `date_start`, `date_end`, `hours`, `title`, `stage_details`, `active`, `company_id`, `type`, `customer_base`, `environment`) VALUES
-(2, 'Hiver 2019', '2018-09-17', '2018-09-17', 40, 'Programmeur Analyste chez IGA', 'Stage en PHP', 1, 2, 'Informatique', 'Service', 'Food'),
+(2, 'Hiver 2019', '2018-09-17', '2018-09-17', 44, 'Programmeur Analyste chez IGA', 'Stage en PHP', 0, 2, 'Informatique', 'Service', 'Food'),
 (3, 'Hiver 2019', '2018-09-17', '2018-09-20', 35, 'Réseau stagiere', 'Stage en réseau', 1, 2, 'Informatique', 'Service', 'Food'),
 (4, 'Hiver 2019', '2018-09-17', '2018-09-17', 40, 'fdsafads', 'Stage en PHP', 1, 2, 'Informatique', 'Service', 'Food');
 
@@ -112,6 +112,26 @@ CREATE TABLE IF NOT EXISTS `Student` (
   `notes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `internship_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Users`
+--
+
+CREATE TABLE IF NOT EXISTS `Users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `category` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `Users`
+--
+
+INSERT INTO `Users` (`id`, `email`, `password`, `category`) VALUES
+(1, 'kev@hotmail.com', '12345', 1);
 
 --
 -- Index pour les tables exportées
@@ -146,6 +166,12 @@ ALTER TABLE `Student`
   ADD KEY `internship_id` (`internship_id`);
 
 --
+-- Index pour la table `Users`
+--
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT pour les tables exportées
 --
 
@@ -169,6 +195,11 @@ ALTER TABLE `Internship`
 --
 ALTER TABLE `Student`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `Users`
+--
+ALTER TABLE `Users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --
