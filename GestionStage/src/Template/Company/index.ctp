@@ -25,6 +25,8 @@
                 <th scope="col"><?= $this->Paginator->sort('postal_code') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('administrative_region') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('phone') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -39,6 +41,8 @@
                 <td><?= h($company->postal_code) ?></td>
                 <td><?= h($company->administrative_region) ?></td>
                 <td><?= $this->Number->format($company->active) ?></td>
+                <td><?= h($company->phone) ?></td>
+                <td><?= h($company->email) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $company->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $company->id]) ?>

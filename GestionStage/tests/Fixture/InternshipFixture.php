@@ -25,7 +25,7 @@ class InternshipFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'period' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'period' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => 'Hiver 2019', 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'date_start' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'date_end' => ['type' => 'date', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'hours' => ['type' => 'integer', 'length' => 2, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
@@ -33,6 +33,9 @@ class InternshipFixture extends TestFixture
         'stage_details' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'active' => ['type' => 'tinyinteger', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'company_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'type' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'customer_base' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'environment' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
             'company_id' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
             'company_id_2' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
@@ -60,13 +63,16 @@ class InternshipFixture extends TestFixture
             [
                 'id' => 1,
                 'period' => 'Lorem ipsum dolor sit amet',
-                'date_start' => '2018-09-10',
-                'date_end' => '2018-09-10',
+                'date_start' => '2018-09-17',
+                'date_end' => '2018-09-17',
                 'hours' => 1,
                 'title' => 'Lorem ipsum dolor sit amet',
                 'stage_details' => 'Lorem ipsum dolor sit amet',
                 'active' => 1,
-                'company_id' => 1
+                'company_id' => 1,
+                'type' => 'Lorem ipsum dolor sit amet',
+                'customer_base' => 'Lorem ipsum dolor sit amet',
+                'environment' => 'Lorem ipsum dolor sit amet'
             ],
         ];
         parent::init();

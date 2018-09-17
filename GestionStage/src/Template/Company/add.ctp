@@ -24,6 +24,8 @@
             echo $this->Form->control('postal_code');
             echo $this->Form->control('administrative_region');
             echo $this->Form->control('active');
+            echo $this->Form->control('phone');
+            echo $this->Form->control('email');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

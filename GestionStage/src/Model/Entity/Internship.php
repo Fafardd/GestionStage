@@ -15,6 +15,9 @@ use Cake\ORM\Entity;
  * @property string $stage_details
  * @property int $active
  * @property int $company_id
+ * @property string $type
+ * @property string $customer_base
+ * @property string $environment
  *
  * @property \App\Model\Entity\Company $company
  * @property \App\Model\Entity\Student[] $student
@@ -40,6 +43,9 @@ class Internship extends Entity
         'stage_details' => true,
         'active' => true,
         'company_id' => true,
+        'type' => true,
+        'customer_base' => true,
+        'environment' => true,
         'company' => true,
         'student' => true
     ];

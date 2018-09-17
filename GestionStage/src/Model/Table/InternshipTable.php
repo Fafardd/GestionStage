@@ -96,6 +96,24 @@ class InternshipTable extends Table
             ->requirePresence('active', 'create')
             ->notEmpty('active');
 
+        $validator
+            ->scalar('type')
+            ->maxLength('type', 255)
+            ->requirePresence('type', 'create')
+            ->notEmpty('type');
+
+        $validator
+            ->scalar('customer_base')
+            ->maxLength('customer_base', 255)
+            ->requirePresence('customer_base', 'create')
+            ->notEmpty('customer_base');
+
+        $validator
+            ->scalar('environment')
+            ->maxLength('environment', 255)
+            ->requirePresence('environment', 'create')
+            ->notEmpty('environment');
+
         return $validator;
     }
 

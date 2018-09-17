@@ -32,6 +32,8 @@ class CompanyFixture extends TestFixture
         'postal_code' => ['type' => 'string', 'length' => 6, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'administrative_region' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'active' => ['type' => 'tinyinteger', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'phone' => ['type' => 'string', 'length' => 11, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'email' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -58,7 +60,9 @@ class CompanyFixture extends TestFixture
                 'province' => 'Lorem ipsum dolor sit amet',
                 'postal_code' => 'Lore',
                 'administrative_region' => 'Lorem ipsum dolor sit amet',
-                'active' => 1
+                'active' => 1,
+                'phone' => 'Lorem ips',
+                'email' => 'Lorem ipsum dolor sit amet'
             ],
         ];
         parent::init();

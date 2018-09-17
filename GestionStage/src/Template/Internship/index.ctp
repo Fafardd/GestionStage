@@ -28,6 +28,9 @@
                 <th scope="col"><?= $this->Paginator->sort('stage_details') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('active') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('company_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('type') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('customer_base') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('environment') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -43,6 +46,9 @@
                 <td><?= h($internship->stage_details) ?></td>
                 <td><?= $this->Number->format($internship->active) ?></td>
                 <td><?= $internship->has('company') ? $this->Html->link($internship->company->name, ['controller' => 'Company', 'action' => 'view', $internship->company->id]) : '' ?></td>
+                <td><?= h($internship->type) ?></td>
+                <td><?= h($internship->customer_base) ?></td>
+                <td><?= h($internship->environment) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $internship->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internship->id]) ?>

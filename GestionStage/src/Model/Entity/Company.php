@@ -14,6 +14,8 @@ use Cake\ORM\Entity;
  * @property string $postal_code
  * @property string $administrative_region
  * @property int $active
+ * @property string $phone
+ * @property string $email
  *
  * @property \App\Model\Entity\Internship[] $internship
  */
@@ -37,6 +39,8 @@ class Company extends Entity
         'postal_code' => true,
         'administrative_region' => true,
         'active' => true,
+        'phone' => true,
+        'email' => true,
         'internship' => true
     ];
 }

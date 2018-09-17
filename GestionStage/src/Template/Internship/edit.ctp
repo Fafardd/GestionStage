@@ -31,8 +31,12 @@
             echo $this->Form->control('hours');
             echo $this->Form->control('title');
             echo $this->Form->control('stage_details');
-            echo $this->Form->control('active');
+			echo "Active : ";
+            echo $this->Form->checkbox('active');
             echo $this->Form->control('company_id', ['options' => $company]);
+            echo $this->Form->control('type');
+            echo $this->Form->control('customer_base');
+            echo $this->Form->control('environment');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

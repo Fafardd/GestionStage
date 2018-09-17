@@ -43,6 +43,14 @@
             <td><?= h($company->administrative_region) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Phone') ?></th>
+            <td><?= h($company->phone) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Email') ?></th>
+            <td><?= h($company->email) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($company->id) ?></td>
         </tr>
@@ -65,6 +73,9 @@
                 <th scope="col"><?= __('Stage Details') ?></th>
                 <th scope="col"><?= __('Active') ?></th>
                 <th scope="col"><?= __('Company Id') ?></th>
+                <th scope="col"><?= __('Type') ?></th>
+                <th scope="col"><?= __('Customer Base') ?></th>
+                <th scope="col"><?= __('Environment') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($company->internship as $internship): ?>
@@ -78,6 +89,9 @@
                 <td><?= h($internship->stage_details) ?></td>
                 <td><?= h($internship->active) ?></td>
                 <td><?= h($internship->company_id) ?></td>
+                <td><?= h($internship->type) ?></td>
+                <td><?= h($internship->customer_base) ?></td>
+                <td><?= h($internship->environment) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Internship', 'action' => 'view', $internship->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Internship', 'action' => 'edit', $internship->id]) ?>

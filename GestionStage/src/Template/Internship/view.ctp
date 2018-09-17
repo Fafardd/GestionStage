@@ -37,6 +37,18 @@
             <td><?= $internship->has('company') ? $this->Html->link($internship->company->name, ['controller' => 'Company', 'action' => 'view', $internship->company->id]) : '' ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Type') ?></th>
+            <td><?= h($internship->type) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Customer Base') ?></th>
+            <td><?= h($internship->customer_base) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Environment') ?></th>
+            <td><?= h($internship->environment) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($internship->id) ?></td>
         </tr>
