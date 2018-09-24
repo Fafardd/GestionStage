@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  *
- * @property \App\Model\Entity\InternshipCustomerbase[] $internship_customerbase
+ * @property \App\Model\Entity\Internship[] $internships
  */
 class Customerbase extends Entity
 {
@@ -25,6 +25,6 @@ class Customerbase extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'internship_customerbase' => true
+        'internships' => true
     ];
 }

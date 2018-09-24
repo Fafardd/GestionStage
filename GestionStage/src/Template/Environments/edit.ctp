@@ -14,8 +14,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Environments'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Internship Environment'), ['controller' => 'InternshipEnvironment', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internship Environment'), ['controller' => 'InternshipEnvironment', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Internships'), ['controller' => 'Internships', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internship'), ['controller' => 'Internships', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="environments form large-9 medium-8 columns content">
@@ -24,6 +24,7 @@
         <legend><?= __('Edit Environment') ?></legend>
         <?php
             echo $this->Form->control('name');
+            echo $this->Form->control('internships._ids', ['options' => $internships]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

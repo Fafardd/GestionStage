@@ -17,7 +17,8 @@ class CustomerbasesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.customerbases',
-        'app.internship_customerbase'
+        'app.internships',
+        'app.internships_customerbases'
     ];
 
     /**

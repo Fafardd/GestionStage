@@ -19,9 +19,9 @@ class InternshipsControllerTest extends IntegrationTestCase
         'app.internships',
         'app.companies',
         'app.types',
-        'app.internship_customerbase',
-        'app.internship_environment',
-        'app.internship_student'
+        'app.internships_customerbases',
+        'app.internships_environments',
+        'app.internships_students'
     ];
 
     /**

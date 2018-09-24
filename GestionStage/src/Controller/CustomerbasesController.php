@@ -35,7 +35,7 @@ class CustomerbasesController extends AppController
     public function view($id = null)
     {
         $customerbase = $this->Customerbases->get($id, [
-            'contain' => ['InternshipCustomerbase']
+            'contain' => ['Internships']
         ]);
 
         $this->set('customerbase', $customerbase);
@@ -58,7 +58,8 @@ class CustomerbasesController extends AppController
             }
             $this->Flash->error(__('The customerbase could not be saved. Please, try again.'));
         }
-        $this->set(compact('customerbase'));
+        $internships = $this->Customerbases->Internships->find('list', ['limit' => 200]);
+        $this->set(compact('customerbase', 'internships'));
     }
 
     /**
@@ -71,7 +72,7 @@ class CustomerbasesController extends AppController
     public function edit($id = null)
     {
         $customerbase = $this->Customerbases->get($id, [
-            'contain' => []
+            'contain' => ['Internships']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $customerbase = $this->Customerbases->patchEntity($customerbase, $this->request->getData());
@@ -82,7 +83,8 @@ class CustomerbasesController extends AppController
             }
             $this->Flash->error(__('The customerbase could not be saved. Please, try again.'));
         }
-        $this->set(compact('customerbase'));
+        $internships = $this->Customerbases->Internships->find('list', ['limit' => 200]);
+        $this->set(compact('customerbase', 'internships'));
     }
 
     /**

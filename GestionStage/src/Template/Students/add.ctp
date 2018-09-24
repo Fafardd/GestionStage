@@ -10,8 +10,8 @@
         <li><?= $this->Html->link(__('List Students'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internships Student'), ['controller' => 'InternshipsStudents', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="students form large-9 medium-8 columns content">

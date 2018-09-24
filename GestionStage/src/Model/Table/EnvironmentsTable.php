@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Environments Model
  *
- * @property \App\Model\Table\InternshipEnvironmentTable|\Cake\ORM\Association\HasMany $InternshipEnvironment
+ * @property \App\Model\Table\InternshipsTable|\Cake\ORM\Association\BelongsToMany $Internships
  *
  * @method \App\Model\Entity\Environment get($primaryKey, $options = [])
  * @method \App\Model\Entity\Environment newEntity($data = null, array $options = [])
@@ -37,8 +37,10 @@ class EnvironmentsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('InternshipEnvironment', [
-            'foreignKey' => 'environment_id'
+        $this->belongsToMany('Internships', [
+            'foreignKey' => 'environment_id',
+            'targetForeignKey' => 'internship_id',
+            'joinTable' => 'Internships_environments'
         ]);
     }
 

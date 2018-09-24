@@ -18,12 +18,12 @@
         <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Types'), ['controller' => 'Types', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Type'), ['controller' => 'Types', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Internship Customerbase'), ['controller' => 'InternshipCustomerbase', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internship Customerbase'), ['controller' => 'InternshipCustomerbase', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Internship Environment'), ['controller' => 'InternshipEnvironment', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internship Environment'), ['controller' => 'InternshipEnvironment', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internships Customerbase'), ['controller' => 'InternshipsCustomerbases', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internships Environment'), ['controller' => 'InternshipsEnvironments', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internships Student'), ['controller' => 'InternshipsStudents', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="internships form large-9 medium-8 columns content">

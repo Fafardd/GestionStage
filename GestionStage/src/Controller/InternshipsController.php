@@ -38,7 +38,7 @@ class InternshipsController extends AppController
     public function view($id = null)
     {
         $internship = $this->Internships->get($id, [
-            'contain' => ['Companies', 'Types', 'InternshipCustomerbase', 'InternshipEnvironment', 'InternshipStudent']
+            'contain' => ['Companies', 'Types', 'InternshipsCustomerbases', 'InternshipsEnvironments', 'InternshipsStudents']
         ]);
 
         $this->set('internship', $internship);

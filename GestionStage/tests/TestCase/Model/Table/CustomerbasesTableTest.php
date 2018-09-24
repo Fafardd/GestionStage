@@ -25,7 +25,7 @@ class CustomerbasesTableTest extends TestCase
      */
     public $fixtures = [
         'app.customerbases',
-        'app.internship_customerbase'
+        'app.internships'
     ];
 
     /**

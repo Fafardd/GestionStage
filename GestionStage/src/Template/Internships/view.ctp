@@ -15,12 +15,12 @@
         <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Types'), ['controller' => 'Types', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Type'), ['controller' => 'Types', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Internship Customerbase'), ['controller' => 'InternshipCustomerbase', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Internship Customerbase'), ['controller' => 'InternshipCustomerbase', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Internship Environment'), ['controller' => 'InternshipEnvironment', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Internship Environment'), ['controller' => 'InternshipEnvironment', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Internships Customerbase'), ['controller' => 'InternshipsCustomerbases', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Internships Environment'), ['controller' => 'InternshipsEnvironments', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Internships Student'), ['controller' => 'InternshipsStudents', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="internships view large-9 medium-8 columns content">
@@ -68,8 +68,8 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Internship Customerbase') ?></h4>
-        <?php if (!empty($internship->internship_customerbase)): ?>
+        <h4><?= __('Related Internships Customerbases') ?></h4>
+        <?php if (!empty($internship->internships_customerbases)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -77,15 +77,15 @@
                 <th scope="col"><?= __('Customerbase Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($internship->internship_customerbase as $internshipCustomerbase): ?>
+            <?php foreach ($internship->internships_customerbases as $internshipsCustomerbases): ?>
             <tr>
-                <td><?= h($internshipCustomerbase->id) ?></td>
-                <td><?= h($internshipCustomerbase->internship_id) ?></td>
-                <td><?= h($internshipCustomerbase->customerbase_id) ?></td>
+                <td><?= h($internshipsCustomerbases->id) ?></td>
+                <td><?= h($internshipsCustomerbases->internship_id) ?></td>
+                <td><?= h($internshipsCustomerbases->customerbase_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipCustomerbase', 'action' => 'view', $internshipCustomerbase->internship_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipCustomerbase', 'action' => 'edit', $internshipCustomerbase->internship_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipCustomerbase', 'action' => 'delete', $internshipCustomerbase->internship_id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipCustomerbase->internship_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipsCustomerbases', 'action' => 'view', $internshipsCustomerbases->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipsCustomerbases', 'action' => 'edit', $internshipsCustomerbases->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipsCustomerbases', 'action' => 'delete', $internshipsCustomerbases->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsCustomerbases->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -93,8 +93,8 @@
         <?php endif; ?>
     </div>
     <div class="related">
-        <h4><?= __('Related Internship Environment') ?></h4>
-        <?php if (!empty($internship->internship_environment)): ?>
+        <h4><?= __('Related Internships Environments') ?></h4>
+        <?php if (!empty($internship->internships_environments)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -102,15 +102,15 @@
                 <th scope="col"><?= __('Environment Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($internship->internship_environment as $internshipEnvironment): ?>
+            <?php foreach ($internship->internships_environments as $internshipsEnvironments): ?>
             <tr>
-                <td><?= h($internshipEnvironment->id) ?></td>
-                <td><?= h($internshipEnvironment->internship_id) ?></td>
-                <td><?= h($internshipEnvironment->environment_id) ?></td>
+                <td><?= h($internshipsEnvironments->id) ?></td>
+                <td><?= h($internshipsEnvironments->internship_id) ?></td>
+                <td><?= h($internshipsEnvironments->environment_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipEnvironment', 'action' => 'view', $internshipEnvironment->internship_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipEnvironment', 'action' => 'edit', $internshipEnvironment->internship_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipEnvironment', 'action' => 'delete', $internshipEnvironment->internship_id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipEnvironment->internship_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipsEnvironments', 'action' => 'view', $internshipsEnvironments->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipsEnvironments', 'action' => 'edit', $internshipsEnvironments->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipsEnvironments', 'action' => 'delete', $internshipsEnvironments->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsEnvironments->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -118,8 +118,8 @@
         <?php endif; ?>
     </div>
     <div class="related">
-        <h4><?= __('Related Internship Student') ?></h4>
-        <?php if (!empty($internship->internship_student)): ?>
+        <h4><?= __('Related Internships Students') ?></h4>
+        <?php if (!empty($internship->internships_students)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -127,15 +127,15 @@
                 <th scope="col"><?= __('Student Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($internship->internship_student as $internshipStudent): ?>
+            <?php foreach ($internship->internships_students as $internshipsStudents): ?>
             <tr>
-                <td><?= h($internshipStudent->id) ?></td>
-                <td><?= h($internshipStudent->internship_id) ?></td>
-                <td><?= h($internshipStudent->student_id) ?></td>
+                <td><?= h($internshipsStudents->id) ?></td>
+                <td><?= h($internshipsStudents->internship_id) ?></td>
+                <td><?= h($internshipsStudents->student_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipStudent', 'action' => 'view', $internshipStudent->student_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipStudent', 'action' => 'edit', $internshipStudent->student_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipStudent', 'action' => 'delete', $internshipStudent->student_id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipStudent->student_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipsStudents', 'action' => 'view', $internshipsStudents->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipsStudents', 'action' => 'edit', $internshipsStudents->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipsStudents', 'action' => 'delete', $internshipsStudents->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsStudents->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

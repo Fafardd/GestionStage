@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Customerbases Model
  *
- * @property \App\Model\Table\InternshipCustomerbaseTable|\Cake\ORM\Association\HasMany $InternshipCustomerbase
+ * @property \App\Model\Table\InternshipsTable|\Cake\ORM\Association\BelongsToMany $Internships
  *
  * @method \App\Model\Entity\Customerbase get($primaryKey, $options = [])
  * @method \App\Model\Entity\Customerbase newEntity($data = null, array $options = [])
@@ -37,8 +37,10 @@ class CustomerbasesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-        $this->hasMany('InternshipCustomerbase', [
-            'foreignKey' => 'customerbase_id'
+        $this->belongsToMany('Internships', [
+            'foreignKey' => 'customerbase_id',
+            'targetForeignKey' => 'internship_id',
+            'joinTable' => 'Internships_customerbases'
         ]);
     }
 

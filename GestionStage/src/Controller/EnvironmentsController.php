@@ -35,7 +35,7 @@ class EnvironmentsController extends AppController
     public function view($id = null)
     {
         $environment = $this->Environments->get($id, [
-            'contain' => ['InternshipEnvironment']
+            'contain' => ['Internships']
         ]);
 
         $this->set('environment', $environment);
@@ -58,7 +58,8 @@ class EnvironmentsController extends AppController
             }
             $this->Flash->error(__('The environment could not be saved. Please, try again.'));
         }
-        $this->set(compact('environment'));
+        $internships = $this->Environments->Internships->find('list', ['limit' => 200]);
+        $this->set(compact('environment', 'internships'));
     }
 
     /**
@@ -71,7 +72,7 @@ class EnvironmentsController extends AppController
     public function edit($id = null)
     {
         $environment = $this->Environments->get($id, [
-            'contain' => []
+            'contain' => ['Internships']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $environment = $this->Environments->patchEntity($environment, $this->request->getData());
@@ -82,7 +83,8 @@ class EnvironmentsController extends AppController
             }
             $this->Flash->error(__('The environment could not be saved. Please, try again.'));
         }
-        $this->set(compact('environment'));
+        $internships = $this->Environments->Internships->find('list', ['limit' => 200]);
+        $this->set(compact('environment', 'internships'));
     }
 
     /**

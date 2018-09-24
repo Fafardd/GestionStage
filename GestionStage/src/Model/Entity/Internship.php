@@ -19,9 +19,9 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Company $company
  * @property \App\Model\Entity\Type $type
- * @property \App\Model\Entity\InternshipCustomerbase[] $internship_customerbase
- * @property \App\Model\Entity\InternshipEnvironment[] $internship_environment
- * @property \App\Model\Entity\InternshipStudent[] $internship_student
+ * @property \App\Model\Entity\InternshipsCustomerbase[] $internships_customerbases
+ * @property \App\Model\Entity\InternshipsEnvironment[] $internships_environments
+ * @property \App\Model\Entity\InternshipsStudent[] $internships_students
  */
 class Internship extends Entity
 {
@@ -47,8 +47,8 @@ class Internship extends Entity
         'type_id' => true,
         'company' => true,
         'type' => true,
-        'internship_customerbase' => true,
-        'internship_environment' => true,
-        'internship_student' => true
+        'internships_customerbases' => true,
+        'internships_environments' => true,
+        'internships_students' => true
     ];
 }

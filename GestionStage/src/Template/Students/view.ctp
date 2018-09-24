@@ -13,8 +13,8 @@
         <li><?= $this->Html->link(__('New Student'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Internship Student'), ['controller' => 'InternshipStudent', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Internships Student'), ['controller' => 'InternshipsStudents', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="students view large-9 medium-8 columns content">
@@ -54,8 +54,8 @@
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Internship Student') ?></h4>
-        <?php if (!empty($student->internship_student)): ?>
+        <h4><?= __('Related Internships Students') ?></h4>
+        <?php if (!empty($student->internships_students)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -63,15 +63,15 @@
                 <th scope="col"><?= __('Student Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($student->internship_student as $internshipStudent): ?>
+            <?php foreach ($student->internships_students as $internshipsStudents): ?>
             <tr>
-                <td><?= h($internshipStudent->id) ?></td>
-                <td><?= h($internshipStudent->internship_id) ?></td>
-                <td><?= h($internshipStudent->student_id) ?></td>
+                <td><?= h($internshipsStudents->id) ?></td>
+                <td><?= h($internshipsStudents->internship_id) ?></td>
+                <td><?= h($internshipsStudents->student_id) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipStudent', 'action' => 'view', $internshipStudent->student_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipStudent', 'action' => 'edit', $internshipStudent->student_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipStudent', 'action' => 'delete', $internshipStudent->student_id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipStudent->student_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'InternshipsStudents', 'action' => 'view', $internshipsStudents->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'InternshipsStudents', 'action' => 'edit', $internshipsStudents->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'InternshipsStudents', 'action' => 'delete', $internshipsStudents->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsStudents->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

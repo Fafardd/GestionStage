@@ -11,9 +11,9 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\CompaniesTable|\Cake\ORM\Association\BelongsTo $Companies
  * @property \App\Model\Table\TypesTable|\Cake\ORM\Association\BelongsTo $Types
- * @property \App\Model\Table\InternshipCustomerbaseTable|\Cake\ORM\Association\HasMany $InternshipCustomerbase
- * @property \App\Model\Table\InternshipEnvironmentTable|\Cake\ORM\Association\HasMany $InternshipEnvironment
- * @property \App\Model\Table\InternshipStudentTable|\Cake\ORM\Association\HasMany $InternshipStudent
+ * @property \App\Model\Table\InternshipsCustomerbasesTable|\Cake\ORM\Association\HasMany $InternshipsCustomerbases
+ * @property \App\Model\Table\InternshipsEnvironmentsTable|\Cake\ORM\Association\HasMany $InternshipsEnvironments
+ * @property \App\Model\Table\InternshipsStudentsTable|\Cake\ORM\Association\HasMany $InternshipsStudents
  *
  * @method \App\Model\Entity\Internship get($primaryKey, $options = [])
  * @method \App\Model\Entity\Internship newEntity($data = null, array $options = [])
@@ -49,13 +49,13 @@ class InternshipsTable extends Table
             'foreignKey' => 'type_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('InternshipCustomerbase', [
+        $this->hasMany('InternshipsCustomerbases', [
             'foreignKey' => 'internship_id'
         ]);
-        $this->hasMany('InternshipEnvironment', [
+        $this->hasMany('InternshipsEnvironments', [
             'foreignKey' => 'internship_id'
         ]);
-        $this->hasMany('InternshipStudent', [
+        $this->hasMany('InternshipsStudents', [
             'foreignKey' => 'internship_id'
         ]);
     }

@@ -8,8 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Customerbases'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Internship Customerbase'), ['controller' => 'InternshipCustomerbase', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internship Customerbase'), ['controller' => 'InternshipCustomerbase', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Internships'), ['controller' => 'Internships', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Internship'), ['controller' => 'Internships', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="customerbases form large-9 medium-8 columns content">
@@ -18,6 +18,7 @@
         <legend><?= __('Add Customerbase') ?></legend>
         <?php
             echo $this->Form->control('name');
+            echo $this->Form->control('internships._ids', ['options' => $internships]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Students Model
  *
  * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\InternshipStudentTable|\Cake\ORM\Association\HasMany $InternshipStudent
+ * @property \App\Model\Table\InternshipsStudentsTable|\Cake\ORM\Association\HasMany $InternshipsStudents
  *
  * @method \App\Model\Entity\Student get($primaryKey, $options = [])
  * @method \App\Model\Entity\Student newEntity($data = null, array $options = [])
@@ -42,7 +42,7 @@ class StudentsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('InternshipStudent', [
+        $this->hasMany('InternshipsStudents', [
             'foreignKey' => 'student_id'
         ]);
     }

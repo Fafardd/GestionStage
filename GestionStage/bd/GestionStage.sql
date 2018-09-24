@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 24 Septembre 2018 à 19:38
+-- Généré le :  Lun 24 Septembre 2018 à 20:02
 -- Version du serveur :  5.6.37
 -- Version de PHP :  7.1.8
 
@@ -38,7 +38,14 @@ CREATE TABLE IF NOT EXISTS `Companies` (
   `phone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `Companies`
+--
+
+INSERT INTO `Companies` (`id`, `name`, `address`, `city`, `province`, `postal_code`, `administrative_region`, `active`, `phone`, `email`, `user_id`) VALUES
+(4, 'IGA', '123 Rue de la vie', 'Laval', 'QC', 'H7R4H8', 'Montréal', 1, '5145145144', 'admin@admin.com', 4);
 
 -- --------------------------------------------------------
 
@@ -129,10 +136,10 @@ INSERT INTO `Internships` (`id`, `period`, `date_start`, `date_end`, `hours`, `t
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Internship_customerbase`
+-- Structure de la table `Internships_customerbases`
 --
 
-CREATE TABLE IF NOT EXISTS `Internship_customerbase` (
+CREATE TABLE IF NOT EXISTS `Internships_customerbases` (
   `id` int(11) NOT NULL,
   `internship_id` int(11) NOT NULL,
   `customerbase_id` int(11) NOT NULL
@@ -141,10 +148,10 @@ CREATE TABLE IF NOT EXISTS `Internship_customerbase` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Internship_environment`
+-- Structure de la table `Internships_environments`
 --
 
-CREATE TABLE IF NOT EXISTS `Internship_environment` (
+CREATE TABLE IF NOT EXISTS `Internships_environments` (
   `id` int(11) NOT NULL,
   `internship_id` int(11) NOT NULL,
   `environment_id` int(11) NOT NULL
@@ -153,14 +160,21 @@ CREATE TABLE IF NOT EXISTS `Internship_environment` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `internship_student`
+-- Structure de la table `internships_students`
 --
 
-CREATE TABLE IF NOT EXISTS `internship_student` (
+CREATE TABLE IF NOT EXISTS `internships_students` (
   `id` int(11) NOT NULL,
   `internship_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `internships_students`
+--
+
+INSERT INTO `internships_students` (`id`, `internship_id`, `student_id`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +191,14 @@ CREATE TABLE IF NOT EXISTS `Students` (
   `other_details` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `notes` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `Students`
+--
+
+INSERT INTO `Students` (`id`, `name`, `first_name`, `phone`, `email`, `other_details`, `notes`, `user_id`) VALUES
+(1, 'Kevin', 'Fafard', '5145145144', 'kev@vendeur.com', 'Jeune gamer', 'fadsfadsf', 6);
 
 -- --------------------------------------------------------
 
@@ -209,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `category` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contenu de la table `Users`
@@ -217,7 +238,9 @@ CREATE TABLE IF NOT EXISTS `Users` (
 
 INSERT INTO `Users` (`id`, `email`, `password`, `category`) VALUES
 (4, 'admin@admin.com', '$2y$10$cOujyuvEgi0OlA9pwap3I.ZFWWYUgCjMlXH17FpIvV6t1BfY4YLg.', 1),
-(6, 'kev@vendeur.com', '$2y$10$//t8jV1SIukgqDbsZg3XNuhl/z9/elXU7OYTs23ajB4NFzp8.KSUS', 1);
+(6, 'kev@vendeur.com', '$2y$10$//t8jV1SIukgqDbsZg3XNuhl/z9/elXU7OYTs23ajB4NFzp8.KSUS', 1),
+(7, 'kev@hotmail.com', '1234', 2),
+(8, 'gg@hotmail.com', '$2y$10$bl7kSryk/zEmKHZgJ62ziOFivqjdyfeyLlng/zpCkjTOc3cj0/Qu6', 2);
 
 --
 -- Index pour les tables exportées
@@ -260,25 +283,25 @@ ALTER TABLE `Internships`
   ADD KEY `type_id` (`type_id`);
 
 --
--- Index pour la table `Internship_customerbase`
+-- Index pour la table `Internships_customerbases`
 --
-ALTER TABLE `Internship_customerbase`
+ALTER TABLE `Internships_customerbases`
   ADD PRIMARY KEY (`id`),
   ADD KEY `internship_id` (`internship_id`,`customerbase_id`),
   ADD KEY `customerbase_id` (`customerbase_id`);
 
 --
--- Index pour la table `Internship_environment`
+-- Index pour la table `Internships_environments`
 --
-ALTER TABLE `Internship_environment`
+ALTER TABLE `Internships_environments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `internship_id` (`internship_id`,`environment_id`),
   ADD KEY `environment_id` (`environment_id`);
 
 --
--- Index pour la table `internship_student`
+-- Index pour la table `internships_students`
 --
-ALTER TABLE `internship_student`
+ALTER TABLE `internships_students`
   ADD PRIMARY KEY (`id`),
   ADD KEY `internship_id` (`internship_id`,`student_id`),
   ADD KEY `student_id` (`student_id`);
@@ -310,7 +333,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT pour la table `Companies`
 --
 ALTER TABLE `Companies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `Coordonators`
 --
@@ -332,25 +355,25 @@ ALTER TABLE `environments`
 ALTER TABLE `Internships`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT pour la table `Internship_customerbase`
+-- AUTO_INCREMENT pour la table `Internships_customerbases`
 --
-ALTER TABLE `Internship_customerbase`
+ALTER TABLE `Internships_customerbases`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `Internship_environment`
+-- AUTO_INCREMENT pour la table `Internships_environments`
 --
-ALTER TABLE `Internship_environment`
+ALTER TABLE `Internships_environments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `internship_student`
+-- AUTO_INCREMENT pour la table `internships_students`
 --
-ALTER TABLE `internship_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `internships_students`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `Students`
 --
 ALTER TABLE `Students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `types`
 --
@@ -360,7 +383,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT pour la table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- Contraintes pour les tables exportées
 --
@@ -378,25 +401,25 @@ ALTER TABLE `Coordonators`
   ADD CONSTRAINT `coordonators_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`);
 
 --
--- Contraintes pour la table `Internship_customerbase`
+-- Contraintes pour la table `Internships_customerbases`
 --
-ALTER TABLE `Internship_customerbase`
-  ADD CONSTRAINT `internship_customerbase_ibfk_1` FOREIGN KEY (`customerbase_id`) REFERENCES `customerbases` (`id`),
-  ADD CONSTRAINT `internship_customerbase_ibfk_2` FOREIGN KEY (`internship_id`) REFERENCES `Internships` (`id`);
+ALTER TABLE `Internships_customerbases`
+  ADD CONSTRAINT `internships_customerbases_ibfk_1` FOREIGN KEY (`internship_id`) REFERENCES `Internships` (`id`),
+  ADD CONSTRAINT `internships_customerbases_ibfk_2` FOREIGN KEY (`customerbase_id`) REFERENCES `customerbases` (`id`);
 
 --
--- Contraintes pour la table `Internship_environment`
+-- Contraintes pour la table `Internships_environments`
 --
-ALTER TABLE `Internship_environment`
-  ADD CONSTRAINT `internship_environment_ibfk_1` FOREIGN KEY (`environment_id`) REFERENCES `environments` (`id`),
-  ADD CONSTRAINT `internship_environment_ibfk_2` FOREIGN KEY (`internship_id`) REFERENCES `Internships` (`id`);
+ALTER TABLE `Internships_environments`
+  ADD CONSTRAINT `internships_environments_ibfk_1` FOREIGN KEY (`internship_id`) REFERENCES `Internships` (`id`),
+  ADD CONSTRAINT `internships_environments_ibfk_2` FOREIGN KEY (`environment_id`) REFERENCES `environments` (`id`);
 
 --
--- Contraintes pour la table `internship_student`
+-- Contraintes pour la table `internships_students`
 --
-ALTER TABLE `internship_student`
-  ADD CONSTRAINT `internship_student_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `Students` (`id`),
-  ADD CONSTRAINT `internship_student_ibfk_2` FOREIGN KEY (`internship_id`) REFERENCES `Internships` (`id`);
+ALTER TABLE `internships_students`
+  ADD CONSTRAINT `internships_students_ibfk_1` FOREIGN KEY (`internship_id`) REFERENCES `Internships` (`id`),
+  ADD CONSTRAINT `internships_students_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `Students` (`id`);
 
 --
 -- Contraintes pour la table `Students`
