@@ -24,7 +24,8 @@ class CoordonatorTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.coordonator'
+        'app.coordonator',
+        'app.users'
     ];
 
     /**

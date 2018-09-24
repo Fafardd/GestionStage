@@ -17,6 +17,9 @@ use Cake\ORM\Entity;
  * @property string $phone
  * @property string $job
  * @property string $fax
+ * @property int $user_id
+ *
+ * @property \App\Model\Entity\User $user
  */
 class Coordonator extends Entity
 {
@@ -40,6 +43,8 @@ class Coordonator extends Entity
         'email' => true,
         'phone' => true,
         'job' => true,
-        'fax' => true
+        'fax' => true,
+        'user_id' => true,
+        'user' => true
     ];
 }

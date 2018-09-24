@@ -13,9 +13,10 @@ use Cake\ORM\Entity;
  * @property string $email
  * @property string $other_details
  * @property string $notes
- * @property int $internship_id
+ * @property int $user_id
  *
- * @property \App\Model\Entity\Internship $internship
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\InternshipStudent[] $internship_student
  */
 class Student extends Entity
 {
@@ -36,7 +37,8 @@ class Student extends Entity
         'email' => true,
         'other_details' => true,
         'notes' => true,
-        'internship_id' => true,
-        'internship' => true
+        'user_id' => true,
+        'user' => true,
+        'internship_student' => true
     ];
 }

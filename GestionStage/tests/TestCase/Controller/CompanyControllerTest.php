@@ -17,6 +17,7 @@ class CompanyControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.company',
+        'app.users',
         'app.internship'
     ];
 

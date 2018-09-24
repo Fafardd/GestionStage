@@ -31,13 +31,13 @@ class StudentFixture extends TestFixture
         'email' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'other_details' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'notes' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'internship_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'user_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
-            'internship_id' => ['type' => 'index', 'columns' => ['internship_id'], 'length' => []],
+            'user_id' => ['type' => 'index', 'columns' => ['user_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'student_ibfk_1' => ['type' => 'foreign', 'columns' => ['internship_id'], 'references' => ['Internship', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
+            'student_ibfk_1' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['Users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -62,7 +62,7 @@ class StudentFixture extends TestFixture
                 'email' => 'Lorem ipsum dolor sit amet',
                 'other_details' => 'Lorem ipsum dolor sit amet',
                 'notes' => 'Lorem ipsum dolor sit amet',
-                'internship_id' => 1
+                'user_id' => 1
             ],
         ];
         parent::init();

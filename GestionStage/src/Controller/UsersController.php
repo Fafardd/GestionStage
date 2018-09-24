@@ -18,7 +18,29 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-	 
+    public function login()
+{
+    if ($this->request->is('post')) {
+        $user = $this->Auth->identify();
+        if ($user) {
+            $this->Auth->setUser($user);
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        $this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
+    }
+}
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['logout', 'add']);
+    }
+    
+    public function logout()
+    {
+        $this->Flash->success('Vous avez été déconnecté.');
+        return $this->redirect($this->Auth->logout());
+    }
     public function index()
     {
         $users = $this->paginate($this->Users);
@@ -36,7 +58,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => []
+            'contain' => ['Companies', 'Coordonators', 'Students']
         ]);
 
         $this->set('user', $user);

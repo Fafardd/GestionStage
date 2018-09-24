@@ -16,8 +16,10 @@ use Cake\ORM\Entity;
  * @property int $active
  * @property string $phone
  * @property string $email
+ * @property int $user_id
  *
- * @property \App\Model\Entity\Internship[] $internship
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Internship[] $internships
  */
 class Company extends Entity
 {
@@ -41,6 +43,8 @@ class Company extends Entity
         'active' => true,
         'phone' => true,
         'email' => true,
-        'internship' => true
+        'user_id' => true,
+        'user' => true,
+        'internships' => true
     ];
 }

@@ -34,22 +34,14 @@ class InternshipFixture extends TestFixture
         'active' => ['type' => 'tinyinteger', 'length' => 4, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'company_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'type_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'customerbase_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'environment_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'company_id' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
             'company_id_2' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
             'company_id_3' => ['type' => 'index', 'columns' => ['company_id'], 'length' => []],
-            'environment_id' => ['type' => 'index', 'columns' => ['environment_id'], 'length' => []],
-            'customerbase_id' => ['type' => 'index', 'columns' => ['customerbase_id'], 'length' => []],
             'type_id' => ['type' => 'index', 'columns' => ['type_id'], 'length' => []],
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'gdsgfsdg' => ['type' => 'foreign', 'columns' => ['company_id'], 'references' => ['Company', 'id'], 'update' => 'cascade', 'delete' => 'cascade', 'length' => []],
-            'internship_ibfk_1' => ['type' => 'foreign', 'columns' => ['type_id'], 'references' => ['type', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'internship_ibfk_2' => ['type' => 'foreign', 'columns' => ['environment_id'], 'references' => ['environment', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'internship_ibfk_3' => ['type' => 'foreign', 'columns' => ['customerbase_id'], 'references' => ['customerbase', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -69,16 +61,14 @@ class InternshipFixture extends TestFixture
             [
                 'id' => 1,
                 'period' => 'Lorem ipsum dolor sit amet',
-                'date_start' => '2018-09-17',
-                'date_end' => '2018-09-17',
+                'date_start' => '2018-09-24',
+                'date_end' => '2018-09-24',
                 'hours' => 1,
                 'title' => 'Lorem ipsum dolor sit amet',
                 'stage_details' => 'Lorem ipsum dolor sit amet',
                 'active' => 1,
                 'company_id' => 1,
-                'type_id' => 1,
-                'customerbase_id' => 1,
-                'environment_id' => 1
+                'type_id' => 1
             ],
         ];
         parent::init();

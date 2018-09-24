@@ -16,7 +16,8 @@ class CoordonatorControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.coordonator'
+        'app.coordonator',
+        'app.users'
     ];
 
     /**

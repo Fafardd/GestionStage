@@ -17,11 +17,11 @@ class InternshipControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.internship',
-        'app.company',
-        'app.type',
-        'app.customerbase',
-        'app.environment',
-        'app.student'
+        'app.companies',
+        'app.types',
+        'app.internship_customerbase',
+        'app.internship_environment',
+        'app.internship_student'
     ];
 
     /**

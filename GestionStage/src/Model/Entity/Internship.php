@@ -16,14 +16,12 @@ use Cake\ORM\Entity;
  * @property int $active
  * @property int $company_id
  * @property int $type_id
- * @property int $customerbase_id
- * @property int $environment_id
  *
  * @property \App\Model\Entity\Company $company
  * @property \App\Model\Entity\Type $type
- * @property \App\Model\Entity\Customerbase $customerbase
- * @property \App\Model\Entity\Environment $environment
- * @property \App\Model\Entity\Student[] $student
+ * @property \App\Model\Entity\InternshipCustomerbase[] $internship_customerbase
+ * @property \App\Model\Entity\InternshipEnvironment[] $internship_environment
+ * @property \App\Model\Entity\InternshipStudent[] $internship_student
  */
 class Internship extends Entity
 {
@@ -47,12 +45,10 @@ class Internship extends Entity
         'active' => true,
         'company_id' => true,
         'type_id' => true,
-        'customerbase_id' => true,
-        'environment_id' => true,
         'company' => true,
         'type' => true,
-        'customerbase' => true,
-        'environment' => true,
-        'student' => true
+        'internship_customerbase' => true,
+        'internship_environment' => true,
+        'internship_student' => true
     ];
 }
