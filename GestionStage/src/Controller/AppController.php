@@ -59,6 +59,8 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login'
             ],
+            'authorize' => ['Controller'],
+
              // Si pas autorisé, on renvoit sur la page précédente
             'unauthorizedRedirect' => $this->referer()
         ]);
@@ -69,9 +71,9 @@ class AppController extends Controller
 		
     }
 
-    public function isAuthorized($user)
-{
-    // Par défaut, on refuse l'accès.
-    return true;
-}
+    /*public function isAuthorized($user)
+    {
+        // Par défaut, on refuse l'accès.
+        return false;
+    }*/
 }

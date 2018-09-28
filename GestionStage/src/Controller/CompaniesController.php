@@ -12,6 +12,16 @@ use App\Controller\AppController;
  */
 class CompaniesController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        //$action = $this->request->getParam('action');
+
+        if($user['category']==2){
+            return true;
+        } 
+        // Par défaut, on refuse l'accès.
+        return false;
+    }
 
     /**
      * Index method

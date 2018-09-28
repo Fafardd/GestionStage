@@ -31,7 +31,7 @@
             echo $this->Form->control('hours');
             echo $this->Form->control('title');
             echo $this->Form->control('stage_details');
-            echo $this->Form->control('active');
+            echo $this->Form->hidden('active', ['value' => '1']);
             echo $this->Form->control('company_id', ['options' => $companies]);
             echo $this->Form->control('type_id', ['options' => $types]);
         ?>

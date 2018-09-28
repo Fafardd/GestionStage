@@ -23,7 +23,8 @@
         <?php
             echo $this->Form->control('email');
             echo $this->Form->control('password');
-            echo $this->Form->control('category');
+            echo $this->Form->hidden('category', ["value" =>'1']);
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

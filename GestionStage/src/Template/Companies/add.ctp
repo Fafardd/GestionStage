@@ -25,7 +25,7 @@
             echo $this->Form->control('province');
             echo $this->Form->control('postal_code');
             echo $this->Form->control('administrative_region');
-            echo $this->Form->control('active');
+            echo $this->Form->hidden('active', ['value' => '1']);
             echo $this->Form->control('phone');
             echo $this->Form->control('email');
             echo $this->Form->control('user_id', ['options' => $users]);
