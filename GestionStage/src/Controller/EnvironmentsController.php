@@ -17,7 +17,11 @@ class EnvironmentsController extends AppController
     {
         //$action = $this->request->getParam('action');
 
+<<<<<<< HEAD
         if($user['category'] == 3){
+=======
+        if($user['category']== 2 || $user['category'] == 3){
+>>>>>>> bc6dfc527811203f66880e6a88e1d69ba52b883e
             return true;
         } 
         // Par défaut, on refuse l'accès.

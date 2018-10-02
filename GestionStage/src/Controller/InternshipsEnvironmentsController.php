@@ -12,6 +12,7 @@ use App\Controller\AppController;
  */
 class InternshipsEnvironmentsController extends AppController
 {
+<<<<<<< HEAD
     public function isAuthorized($user)
     {
         //$action = $this->request->getParam('action');
@@ -22,6 +23,8 @@ class InternshipsEnvironmentsController extends AppController
         // Par défaut, on refuse l'accès.
         return false;
     }
+=======
+>>>>>>> bc6dfc527811203f66880e6a88e1d69ba52b883e
 
     /**
      * Index method

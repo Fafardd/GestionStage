@@ -12,7 +12,10 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+<<<<<<< HEAD
     
+=======
+>>>>>>> bc6dfc527811203f66880e6a88e1d69ba52b883e
 
     /**
      * Index method
