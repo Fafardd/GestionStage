@@ -12,7 +12,16 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
-    
+    public function isAuthorized($user)
+    {
+        //$action = $this->request->getParam('action');
+
+        if($user['category'] == 3){
+            return true;
+        } 
+        // Par défaut, on refuse l'accès.
+        return false;
+    }
 
     /**
      * Index method
