@@ -10,6 +10,7 @@ use Cake\TestSuite\IntegrationTestCase;
 class InternshipControllerTest extends IntegrationTestCase
 {
 
+    public $Internships;
     /**
      * Fixtures
      *

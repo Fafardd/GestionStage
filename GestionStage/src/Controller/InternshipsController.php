@@ -30,8 +30,11 @@ class InternshipsController extends AppController
      */
     public function index()
     {
-		$this -> loadModel ('Companies');
-		$companies = $this->paginate($this->Companies);
+        $this->paginate = [
+            'contain' => ['Companies', 'Types']
+        ];
+        $internships = $this->paginate($this->Internships);
+       
 
 		
 		$loggeduser = $this->request->getSession()->read('Auth.User');

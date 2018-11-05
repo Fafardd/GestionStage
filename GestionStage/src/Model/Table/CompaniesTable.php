@@ -127,4 +127,12 @@ class CompaniesTable extends Table
 
         return $rules;
     }
+
+    public function findActive(Query $query, array $options)
+    {
+        $query->where([
+            $this->alias() . '.active' => 1
+        ]);
+        return $query;
+    }
 }
