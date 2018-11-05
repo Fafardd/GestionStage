@@ -17,7 +17,7 @@ class InternshipsController extends AppController
     {
         //$action = $this->request->getParam('action');
 
-        if($user['category']== 2){
+        if($user['category']== 1||$user['category']== 2||$user['category']== 3){
             return true;
         } 
         // Par défaut, on refuse l'accès.
@@ -30,12 +30,26 @@ class InternshipsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Companies', 'Types']
-        ];
-        $internships = $this->paginate($this->Internships);
+		$this -> loadModel ('Companies');
+		$companies = $this->paginate($this->Companies);
 
-        $this->set(compact('internships'));
+		
+		$loggeduser = $this->request->getSession()->read('Auth.User');
+		
+		if($loggeduser['category']==2){
+		$query = $this->Internships->find()->leftJoinWith('Companies')->where(['Companies.user_id'=>$loggeduser['id']]);
+		//debug($query);
+        
+        $internships = $this->paginate($query);
+		}elseif($loggeduser['category']==1||$loggeduser['category']==3){
+			$internships = $this->paginate($this->Internships);
+		}
+
+		//$this->paginate = [
+         //   'contain' => ['Companies', 'Types']
+        //];
+		
+        $this->set(compact('internships', 'companies'));
     }
 
     /**

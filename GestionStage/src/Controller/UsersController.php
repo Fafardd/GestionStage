@@ -14,14 +14,21 @@ class UsersController extends AppController
 {
     public function isAuthorized($user)
     {
-        //$action = $this->request->getParam('action');
-
-        if($user['category'] == 3){
-            return true;
-        } 
-        // Par défaut, on refuse l'accès.
-        return false;
-    }
+		$action = $this->request->getParam('action');
+		// Toutes les autres actions nécessitent un slug
+		$userid = $user['id'];
+		if (!$userid) {
+			return false;
+		}
+		
+		if ($this->Auth->user('category') == '3') {
+			return true;
+		}
+		// On vérifie que l'article appartient à l'utilisateur connecté
+		$id = (int) $this->request->getParam('pass.0');
+		
+		return $id === $user['id'];
+	}
 
     /**
      * Index method

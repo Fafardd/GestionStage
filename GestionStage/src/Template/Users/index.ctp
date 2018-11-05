@@ -35,11 +35,25 @@
                 <td><?= h($user->email) ?></td>
                 <td><?= h($user->password) ?></td>
                 <td><?= $this->Number->format($user->category) ?></td>
+				
+				<?php $loggeduser = $this->request->getSession()->read('Auth.User');
+                        if (($loggeduser['category'] == 1 || $loggeduser['category'] == 2) && $user->email == $loggeduser['email']) { ?>
+				
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
                 </td>
+				
+				<?php } else if (($loggeduser['category'] == 1 || $loggeduser['category'] == 2)&& $user->email != $loggeduser['email']){ ?>
+						
+						<?php } else if ($loggeduser['category'] == 3 ){ ?>
+						<td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+						</td>
+						<?php } ?>
             </tr>
             <?php endforeach; ?>
         </tbody>

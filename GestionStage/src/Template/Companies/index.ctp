@@ -47,11 +47,21 @@
                 <td><?= h($company->phone) ?></td>
                 <td><?= h($company->email) ?></td>
                 <td><?= $company->has('user') ? $this->Html->link($company->user->email, ['controller' => 'Users', 'action' => 'view', $company->user->id]) : '' ?></td>
+				<?php $loggeduser = $this->request->getSession()->read('Auth.User');
+                        if (($loggeduser['category'] == 2 && $company->email == $loggeduser['email'])||$loggeduser['category'] == 3) { ?>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $company->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $company->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $company->id], ['confirm' => __('Are you sure you want to delete # {0}?', $company->id)]) ?>
                 </td>
+				
+						<?php } else if ($loggeduser['category'] == 2 && $company->email != $loggeduser['email']){ ?>
+						
+						<?php } else { ?>
+						<td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $company->id]) ?>
+                </td>
+						<?php }?>
             </tr>
             <?php endforeach; ?>
         </tbody>

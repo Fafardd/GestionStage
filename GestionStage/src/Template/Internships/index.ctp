@@ -39,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($internships as $internship): ?>
+            <?php foreach ($internships as $internship):  /*debug($internship);*/ ?>
             <tr>
                 <td><?= $this->Number->format($internship->id) ?></td>
                 <td><?= h($internship->period) ?></td>
@@ -49,12 +49,16 @@
                 <td><?= h($internship->title) ?></td>
                 <td><?= h($internship->stage_details) ?></td>
                 <td><?= $this->Number->format($internship->active) ?></td>
+                
                 <td><?= $internship->has('company') ? $this->Html->link($internship->company->name, ['controller' => 'Companies', 'action' => 'view', $internship->company->id]) : '' ?></td>
                 <td><?= $internship->has('type') ? $this->Html->link($internship->type->name, ['controller' => 'Types', 'action' => 'view', $internship->type->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $internship->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internship->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $internship->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internship->id)]) ?>
+					
+					
+						
                 </td>
             </tr>
             <?php endforeach; ?>

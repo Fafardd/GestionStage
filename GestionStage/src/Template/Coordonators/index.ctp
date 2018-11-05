@@ -47,6 +47,9 @@
                 <td><?= h($coordonator->job) ?></td>
                 <td><?= h($coordonator->fax) ?></td>
                 <td><?= $coordonator->has('user') ? $this->Html->link($coordonator->user->email, ['controller' => 'Users', 'action' => 'view', $coordonator->user->id]) : '' ?></td>
+				
+				
+				
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $coordonator->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $coordonator->id]) ?>
