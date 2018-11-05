@@ -4,6 +4,7 @@ namespace App\Test\TestCase\Model\Table;
 use App\Model\Table\UsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
+use Cake\Validation\Validator;
 
 /**
  * App\Model\Table\UsersTable Test Case
@@ -42,6 +43,14 @@ class UsersTableTest extends TestCase
         $this->Users = TableRegistry::getTableLocator()->get('Users', $config);
     }
 
+    public function testValidateEmailFail () {
+        $user = $this->Users->find('all')->first()->toArray();
+        $user['email'] = 'email.ca';
+        $errors = $this->Users->validationDefault(new Validator())->errors($user);
+        $this->assertTrue(!empty($errors['email']));
+    }
+
+    
     /**
      * tearDown method
      *

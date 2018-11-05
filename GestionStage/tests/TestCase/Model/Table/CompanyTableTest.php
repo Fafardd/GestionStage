@@ -41,6 +41,8 @@ class CompanyTableTest extends TestCase
         $this->Company = TableRegistry::getTableLocator()->get('Company', $config);
     }
 
+    
+
     /**
      * tearDown method
      *

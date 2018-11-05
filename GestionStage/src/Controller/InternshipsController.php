@@ -34,6 +34,7 @@ class InternshipsController extends AppController
             'contain' => ['Companies', 'Types']
         ];
         $internships = $this->paginate($this->Internships);
+       
 
         $this->set(compact('internships'));
     }
