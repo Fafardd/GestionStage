@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Mailer\Email;
+use Cake\Utility\Text;
+use Cake\ORM\TableRegistry;
 
 /**
  * Internships Controller
@@ -17,7 +20,7 @@ class InternshipsController extends AppController
     {
         //$action = $this->request->getParam('action');
 
-        if($user['category']== 2){
+        if($user['category']== 2 ||$user['category']== 3){
             return true;
         } 
         // Par défaut, on refuse l'accès.
@@ -61,9 +64,24 @@ class InternshipsController extends AppController
      */
     public function add()
     {
+		$this->loadModel("users");
+		$users = $this->paginate($this->users);		
+		
         $internship = $this->Internships->newEntity();
         if ($this->request->is('post')) {
             $internship = $this->Internships->patchEntity($internship, $this->request->getData());
+			
+			foreach ($users as $user){
+				
+				if ($user->category == 1) {
+					
+					$email = new Email('tinstage');
+					$email->setTo($user->email)->setSubject('Nouveau stage : '.$internship->title)->send("Bonjour,\n\nNous souhaitons vous informer qu’un nouvelle offre de stage est disponible : \n\n".$internship->title."\n\n".$internship->stage_details."\n\nBonne recherche de stage !\n\nCeci est un message automatisé. Veuillez ne pas y répondre. Prenez contact avec le coordonnateur de stage pour toute question.");
+					
+				}
+				
+			}
+			
             if ($this->Internships->save($internship)) {
                 $this->Flash->success(__('The internship has been saved.'));
 
