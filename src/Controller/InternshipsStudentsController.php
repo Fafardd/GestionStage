@@ -68,7 +68,7 @@ class InternshipsStudentsController extends AppController
     {
         //$action = $this->request->getParam('action');
 
-        if($user['category']== 1){
+        if($user['category']== 1 || $user['category']== 2 || $user['category']== 3){
             return true;
         } 
         // Par défaut, on refuse l'accès.
@@ -79,9 +79,17 @@ class InternshipsStudentsController extends AppController
         $this->paginate = [
             'contain' => ['Internships', 'Students']
         ];
+		$this->loadModel('Internships');
         $internshipsStudents = $this->paginate($this->InternshipsStudents);
+		$loggeduser = $this->request->getSession()->read('Auth.User');
+		if($loggeduser['category']==2){
+		$query = $this->Internships->find()->leftJoinWith('Companies')->where(['Companies.user_id'=>$loggeduser['id']]);
+        //$internships = $this->paginate($query);
+		}elseif($loggeduser['category']==1||$loggeduser['category']==3){
+			$internshipsStudents = $this->paginate($this->InternshipsStudents);
+		}
 
-        $this->set(compact('internshipsStudents'));
+        $this->set(compact('internshipsStudents', 'query'));
     }
     public function view($id = null)
     {

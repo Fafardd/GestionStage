@@ -14,7 +14,7 @@ class InternshipsController extends AppController
 		$action = $this->request->getParam('action');
 		
 		if(in_array($action, ['index'])){
-			$retour= true;
+			$retour =  true;
 			
 		}else {
 			if($user['category']== 2||$user['category']== 3){
