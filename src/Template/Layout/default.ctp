@@ -44,7 +44,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <ul class="right">
                     <li>
                         <?php
-                            echo $this->Html->link('Internships', ['controller'=> 'Internships'])
+                            echo $this->Html->link('Internships', ['controller'=> 'Internships', 'action' => 'index'])
                         ?>
                     </li>
                     <li>

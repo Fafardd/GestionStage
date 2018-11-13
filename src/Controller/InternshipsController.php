@@ -9,10 +9,20 @@ class InternshipsController extends AppController
 {
     public function isAuthorized($user)
     {
-        if($user['category']== 1||$user['category']== 2||$user['category']== 3){
-            return true;
-        } 
-        return false;
+		$retour = false;
+		
+		$action = $this->request->getParam('action');
+		
+		if(in_array($action, ['index'])){
+			$retour= true;
+			
+		}else {
+			if($user['category']== 2||$user['category']== 3){
+				$retour= true;
+			}
+		}
+		
+        return $retour;
     }
     public function index()
     {
