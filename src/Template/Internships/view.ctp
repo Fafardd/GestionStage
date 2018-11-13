@@ -67,9 +67,12 @@
             <td><?= h($internship->date_end) ?></td>
         </tr>
     </table>
-    <?= $this->Form->create('Postuler', ['type' => 'GET', 'url' => ['controller' => 'InternshipsStudents', 'action'=> 'postuler', $internship->id]])  ?>
-   <?= $this->Form->button('Postuler')  ?>
-   <?= $this->Form->end()  ?>
+	<?php $loggeduser = $this->request->getSession()->read('Auth.User');
+                        if ($loggeduser['category'] == 1 ||$loggeduser['category'] == 3) { ?>
+	<?= $this->Form->create('Postuler', ['type' => 'GET', 'url' => ['controller' => 'InternshipsStudents', 'action'=> 'postuler', $internship->id]])  ?>
+    <?= $this->Form->button('Postuler')  ?>
+    <?= $this->Form->end();  }?>
+	
     <div class="related">
         <h4><?= __('Related Internships Customerbases') ?></h4>
         <?php if (!empty($internship->internships_customerbases)): ?>

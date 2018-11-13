@@ -2,85 +2,60 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
-/**
- * Internships Controller
- *
- * @property \App\Model\Table\InternshipsTable $Internships
- *
- * @method \App\Model\Entity\Internship[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
+use Cake\Mailer\Email;
+use Cake\Utility\Text;
+use Cake\ORM\TableRegistry;
 class InternshipsController extends AppController
 {
-
     public function isAuthorized($user)
     {
-        //$action = $this->request->getParam('action');
-
         if($user['category']== 1||$user['category']== 2||$user['category']== 3){
             return true;
         } 
-        // Par défaut, on refuse l'accès.
         return false;
     }
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
     public function index()
     {
         $this->paginate = [
             'contain' => ['Companies', 'Types']
         ];
         $internships = $this->paginate($this->Internships);
-       
-
-		
 		$loggeduser = $this->request->getSession()->read('Auth.User');
-		
 		if($loggeduser['category']==2){
 		$query = $this->Internships->find()->leftJoinWith('Companies')->where(['Companies.user_id'=>$loggeduser['id']]);
-		//debug($query);
-        
         $internships = $this->paginate($query);
 		}elseif($loggeduser['category']==1||$loggeduser['category']==3){
 			$internships = $this->paginate($this->Internships);
 		}
-
-		//$this->paginate = [
-         //   'contain' => ['Companies', 'Types']
-        //];
-		
         $this->set(compact('internships', 'companies'));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Internship id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $internship = $this->Internships->get($id, [
             'contain' => ['Companies', 'Types', 'InternshipsCustomerbases', 'InternshipsEnvironments', 'InternshipsStudents']
         ]);
-
         $this->set('internship', $internship);
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
+		$this->loadModel("users");
+		$users = $this->paginate($this->users);		
+		
         $internship = $this->Internships->newEntity();
         if ($this->request->is('post')) {
             $internship = $this->Internships->patchEntity($internship, $this->request->getData());
+			
+				
+			foreach ($users as $user){
+				if ($user->category == 1) {
+					
+					$email = new Email('tinstage');
+					$email->setTo($user->email)->setSubject('Nouveau stage : '.$internship->title)->send("Bonjour,\n\nNous souhaitons vous informer qu’un nouvelle offre de stage est disponible : \n\n".$internship->title."\n\n".$internship->stage_details."\n\nBonne recherche de stage !\n\nCeci est un message automatisé. Veuillez ne pas y répondre. Prenez contact avec le coordonnateur de stage pour toute question.");
+					
+				}
+				
+			}
+			
             if ($this->Internships->save($internship)) {
                 $this->Flash->success(__('The internship has been saved.'));
 
@@ -92,14 +67,6 @@ class InternshipsController extends AppController
         $types = $this->Internships->Types->find('list', ['limit' => 200]);
         $this->set(compact('internship', 'companies', 'types'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Internship id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $internship = $this->Internships->get($id, [
@@ -118,14 +85,6 @@ class InternshipsController extends AppController
         $types = $this->Internships->Types->find('list', ['limit' => 200]);
         $this->set(compact('internship', 'companies', 'types'));
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Internship id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

@@ -2,32 +2,68 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Mailer\Email;
+use Cake\Utility\Text;
 
-/**
- * InternshipsStudents Controller
- *
- * @property \App\Model\Table\InternshipsStudentsTable $InternshipsStudents
- *
- * @method \App\Model\Entity\InternshipsStudent[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
 class InternshipsStudentsController extends AppController
 {
-    public function postuler($InternshipId  = null){
+	public function postuler($internshipid){
         $internshipsStudent = $this->InternshipsStudents->newEntity();
-        if($InternshipId!=null){
-        $internshipsStudent['internship_id'] = $InternshipId;
-        $loguser = $this->request->session()->read('Auth.User');
-        $student = $this->InternshipsStudents->Students->findByUserId($loguser['id'])->first();
-        $internshipsStudent['student_id'] = $student['id'];
-            if ($this->InternshipsStudents->save($internshipsStudent)) {
-                $this->Flash->success(__('The internships application has been saved.'));
-                return $this->redirect(['controller' => 'Internships', 'action' => 'index']);
-            }
-        }
-            $this->Flash->error(__('The internships application could not be saved. Please, try again.'));
+		
+        if($internshipid!=null){
+			$internshipsStudent['internship_id'] = $internshipid;
+			$loguser = $this->request->getSession()->read('Auth.User');
+			$student = $this->InternshipsStudents->Students->findByUserId($loguser['id'])->first();
+			if ($student != null) {
+				$internshipsStudent['student_id'] = $student['id'];
+				if ($this->InternshipsStudents->save($internshipsStudent)) {
+					
+					$this->loadModel('companies');
+					$companies = $this->paginate($this->companies);
+					
+					
+					$this->loadModel('internships');
+					$internships = $this->paginate($this->internships);
+					
+					$currentInternship;
+					
+					$currentStudent = $student;
+					
+					foreach ($internships as $internship){
+						
+						if ($internshipid == $internship->id) {
+							
+							$currentInternship = $internship;
+							
+							break;
+							
+						}
+						
+					}
+					
+					
+					foreach ($companies as $companie){
+						
+						if ($currentInternship->company_id == $companie->id) {
+							
+							$email = new Email('tinstage');
+							$email->setTo($companie->email)->setSubject('Nouveau appliquant : '.$currentStudent->name." ".$currentStudent->first_name." Pour : ".$currentInternship->title)->send("Nous souhaitons vous informer qu’un étudiant a appliqué sur votre offre de stage.\n\nOffre de stage : ".$currentInternship->title."\n\nNom de l’élève : ".$currentStudent->name." ".$currentStudent->first_name."\nEmail de l’élève : ".$currentStudent->email."\nTelephone de l’élève : ".$currentStudent->phone."\nNotes de l’élève : ".$currentStudent->notes."\nAutres details de l’élève : ".$currentStudent->other_details."\n\nAu plaisir de vous revoir.\n\nCeci est un message automatisé. Veuillez ne pas y répondre. Prenez contact avec le coordonnateur de stage pour toute question.");	
+					
+							break;
+						}
+						
+					}
+					
+					$this->Flash->success(__('The internships application has been saved.'));
+					return $this->redirect(['controller' => 'Internships', 'action' => 'index']);
+				}
+			} else {
+				$this->Flash->error(__('Your are not yet registered as a student, please advise your internship coordonator.'));
+			}
+		}
+        $this->Flash->error(__('The internships application could not be saved. Please, try again.'));
         
     }
-
     public function isAuthorized($user)
     {
         //$action = $this->request->getParam('action');
@@ -38,11 +74,6 @@ class InternshipsStudentsController extends AppController
         // Par défaut, on refuse l'accès.
         return false;
     }
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
     public function index()
     {
         $this->paginate = [
@@ -52,14 +83,6 @@ class InternshipsStudentsController extends AppController
 
         $this->set(compact('internshipsStudents'));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Internships Student id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $internshipsStudent = $this->InternshipsStudents->get($id, [
@@ -68,12 +91,6 @@ class InternshipsStudentsController extends AppController
 
         $this->set('internshipsStudent', $internshipsStudent);
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $internshipsStudent = $this->InternshipsStudents->newEntity();
@@ -90,14 +107,6 @@ class InternshipsStudentsController extends AppController
         $students = $this->InternshipsStudents->Students->find('list', ['limit' => 200]);
         $this->set(compact('internshipsStudent', 'internships', 'students'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Internships Student id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $internshipsStudent = $this->InternshipsStudents->get($id, [
@@ -116,14 +125,6 @@ class InternshipsStudentsController extends AppController
         $students = $this->InternshipsStudents->Students->find('list', ['limit' => 200]);
         $this->set(compact('internshipsStudent', 'internships', 'students'));
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Internships Student id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

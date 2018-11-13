@@ -2,14 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
-/**
- * Users Controller
- *
- * @property \App\Model\Table\UsersTable $Users
- *
- * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
+use Cake\Mailer\Email;
+use Cake\Utility\Text;
 class UsersController extends AppController
 {
     public function isAuthorized($user)
@@ -20,21 +14,13 @@ class UsersController extends AppController
 		if (!$userid) {
 			return false;
 		}
-		
 		if ($this->Auth->user('category') == '3') {
 			return true;
 		}
-		// On vérifie que l'article appartient à l'utilisateur connecté
 		$id = (int) $this->request->getParam('pass.0');
 		
 		return $id === $user['id'];
 	}
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
     public function login()
 {
     if ($this->request->is('post')) {
@@ -46,13 +32,11 @@ class UsersController extends AppController
         $this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
     }
 }
-
     public function initialize()
     {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);
     }
-    
     public function logout()
     {
         $this->Flash->success('Vous avez été déconnecté.');
@@ -64,14 +48,6 @@ class UsersController extends AppController
 
         $this->set(compact('users'));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
@@ -80,17 +56,13 @@ class UsersController extends AppController
 
         $this->set('user', $user);
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+			$email = new Email('tinstage');
+			$email->setTo($user->email)->setSubject('Voici vos identifiants')->send("Email : ".$user->email."\nPassword : ".$this->request->getData('password'));
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -100,14 +72,6 @@ class UsersController extends AppController
         }
         $this->set(compact('user'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
@@ -124,14 +88,6 @@ class UsersController extends AppController
         }
         $this->set(compact('user'));
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
