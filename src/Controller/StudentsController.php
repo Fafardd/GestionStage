@@ -17,17 +17,13 @@ class StudentsController extends AppController
     {
         //$action = $this->request->getParam('action');
 
-        if($user['category']== 1){
+if($user['category']== 1 || $user['category']== 3){
             return true;
         } 
         // Par défaut, on refuse l'accès.
         return false;
     }
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
+
     public function index()
     {
         $this->paginate = [
@@ -38,13 +34,6 @@ class StudentsController extends AppController
         $this->set(compact('students'));
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id Student id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $student = $this->Students->get($id, [
@@ -53,12 +42,16 @@ class StudentsController extends AppController
 
         $this->set('student', $student);
     }
+	
+	public function etuSansStage($id = null)
+    {
+		
+		$students = $this->paginate($this->Students);
+		
+        $this->set(compact('students'));
+		
+    }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $student = $this->Students->newEntity();
@@ -75,13 +68,6 @@ class StudentsController extends AppController
         $this->set(compact('student', 'users'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Student id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $student = $this->Students->get($id, [
@@ -100,13 +86,6 @@ class StudentsController extends AppController
         $this->set(compact('student', 'users'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Student id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

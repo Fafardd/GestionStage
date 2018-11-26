@@ -41,6 +41,7 @@
                      <?= $this->Html->link(__('View'), ['action' => 'view', $internshipsStudent->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internshipsStudent->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $internshipsStudent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsStudent->id)]) ?>
+					<?= $this->Html->link(__('Accepter_Etudiant'), ['action' => 'Tstage', $internshipsStudent->student_id]) ?>
                 </td>
 				
 					<?php  } }
@@ -65,6 +66,7 @@
                     <?= $this->Html->link(__('View'), ['action' => 'view', $internshipsStudent->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internshipsStudent->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $internshipsStudent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsStudent->id)]) ?>
+					<?= $this->Html->link(__('Accepter_Etudiant'), ['action' => 'Tstage', $internshipsStudent->student_id]) ?>
                 </td>
 				<?php } ?>
             </tr>

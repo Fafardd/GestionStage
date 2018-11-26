@@ -3,6 +3,8 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Mailer\Email;
 use Cake\Utility\Text;
+use Cake\ORM\TableRegistry;
+
 class InternshipsStudentsController extends AppController
 {
 	public function postuler($internshipid){
@@ -62,6 +64,8 @@ class InternshipsStudentsController extends AppController
         $this->Flash->error(__('The internships application could not be saved. Please, try again.'));
         
     }
+	
+	
     public function isAuthorized($user)
     {
         //$action = $this->request->getParam('action');
@@ -71,6 +75,7 @@ class InternshipsStudentsController extends AppController
         // Par défaut, on refuse l'accès.
         return false;
     }
+	
     public function index()
     {	
 	
@@ -110,6 +115,7 @@ class InternshipsStudentsController extends AppController
 		
         $this->set(compact('internshipsStudents', 'query', 'actStudent', 'Internships'));
     }
+	
     public function view($id = null)
     {
         $internshipsStudent = $this->InternshipsStudents->get($id, [
@@ -117,6 +123,28 @@ class InternshipsStudentsController extends AppController
         ]);
         $this->set('internshipsStudent', $internshipsStudent);
     }
+	
+	public function tstage($student_id = null)
+    {
+		$this->loadModel('students');
+		
+		$students = $this->paginate($this->students);	
+		
+		foreach ($students as $student){
+			if ($student->id == $student_id) {
+				
+				$Updated = TableRegistry::get('students');
+				$_student = $Updated->get($student->id);
+
+				$_student->aUnStage = 1;
+				$Updated->save($_student);
+				
+				$this->Flash->success(__('L\'etudiant a ete accepte avec success.'));
+				return $this->redirect(['controller' => 'internshipsStudents', 'action' => 'index']);
+			}
+		}
+    }
+	
     public function add()
     {
         $internshipsStudent = $this->InternshipsStudents->newEntity();
@@ -132,6 +160,7 @@ class InternshipsStudentsController extends AppController
         $students = $this->InternshipsStudents->Students->find('list', ['limit' => 200]);
         $this->set(compact('internshipsStudent', 'internships', 'students'));
     }
+	
     public function edit($id = null)
     {
         $internshipsStudent = $this->InternshipsStudents->get($id, [
@@ -149,6 +178,7 @@ class InternshipsStudentsController extends AppController
         $students = $this->InternshipsStudents->Students->find('list', ['limit' => 200]);
         $this->set(compact('internshipsStudent', 'internships', 'students'));
     }
+	
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
