@@ -49,18 +49,34 @@ class InternshipsController extends AppController
     public function add()
     {
 		$this->loadModel("users");
-		$users = $this->paginate($this->users);		
+		$users = $this->paginate($this->users);
+		$this->loadModel("companies");
+		$companies = $this->paginate($this->companies);	
 		
         $internship = $this->Internships->newEntity();
         if ($this->request->is('post')) {
             $internship = $this->Internships->patchEntity($internship, $this->request->getData());
 			
+			
+			$com;	
+		
+		foreach ($companies as $companie){
+				if ($companie->id == $internship['company_id']) {
+					
+					
+					$com = $companie;
+					
+					break;
+					
+				}
+				
+			}
 				
 			foreach ($users as $user){
 				if ($user->category == 1) {
 					
 					$email = new Email('tinstage');
-					$email->setTo($user->email)->setSubject('Nouveau stage : '.$internship->title)->send("Bonjour,\n\nNous souhaitons vous informer qu’un nouvelle offre de stage est disponible : \n\n".$internship->title."\n\n".$internship->stage_details."\n\nBonne recherche de stage !\n\nCeci est un message automatisé. Veuillez ne pas y répondre. Prenez contact avec le coordonnateur de stage pour toute question.");
+					$email->setTo($user->email)->setSubject('Nouveau stage : '.$com->name.$internship->title)->send("Bonjour,\n\nNous souhaitons vous informer qu’un nouvelle offre de stage est disponible : \n\nTitre du stage :".$internship->title."\n\nDetails du stage :".$internship->stage_details."\nCompany Email :".$com->email."\nCompany Phone :".$com->phone."\nCompany Address :".$com->address."\n\nBonne recherche de stage !\n\nCeci est un message automatisé. Veuillez ne pas y répondre. Prenez contact avec le coordonnateur de stage pour toute question.");
 					
 				}
 				

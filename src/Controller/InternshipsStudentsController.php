@@ -1,10 +1,8 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
 use Cake\Mailer\Email;
 use Cake\Utility\Text;
-
 class InternshipsStudentsController extends AppController
 {
 	public function postuler($internshipid){
@@ -67,7 +65,6 @@ class InternshipsStudentsController extends AppController
     public function isAuthorized($user)
     {
         //$action = $this->request->getParam('action');
-
         if($user['category']== 1 || $user['category']== 2 || $user['category']== 3){
             return true;
         } 
@@ -75,28 +72,49 @@ class InternshipsStudentsController extends AppController
         return false;
     }
     public function index()
-    {
-        $this->paginate = [
+    {	
+	
+	$this->paginate = [
             'contain' => ['Internships', 'Students']
         ];
+	
+		$this->loadModel("Students");
+		$Students = $this->Students->find()->where([true]);		
 		$this->loadModel('Internships');
+		$Internships = $this->Internships->find()->where([true]);		
         $internshipsStudents = $this->paginate($this->InternshipsStudents);
+		$actStudent;
 		$loggeduser = $this->request->getSession()->read('Auth.User');
 		if($loggeduser['category']==2){
 		$query = $this->Internships->find()->leftJoinWith('Companies')->where(['Companies.user_id'=>$loggeduser['id']]);
         //$internships = $this->paginate($query);
 		}elseif($loggeduser['category']==1||$loggeduser['category']==3){
+			
+			foreach ($Students as $student){
+				if ($student->user_id == $loggeduser['id']) {
+					
+					
+					$actStudent = $student;
+					
+					break;
+					
+				}
+				
+			}
 			$internshipsStudents = $this->paginate($this->InternshipsStudents);
 		}
-
-        $this->set(compact('internshipsStudents', 'query'));
+		
+		$this->paginate = [
+            'contain' => ['Internships', 'Students']
+        ];
+		
+        $this->set(compact('internshipsStudents', 'query', 'actStudent', 'Internships'));
     }
     public function view($id = null)
     {
         $internshipsStudent = $this->InternshipsStudents->get($id, [
             'contain' => ['Internships', 'Students']
         ]);
-
         $this->set('internshipsStudent', $internshipsStudent);
     }
     public function add()
@@ -106,7 +124,6 @@ class InternshipsStudentsController extends AppController
             $internshipsStudent = $this->InternshipsStudents->patchEntity($internshipsStudent, $this->request->getData());
             if ($this->InternshipsStudents->save($internshipsStudent)) {
                 $this->Flash->success(__('The internships student has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The internships student could not be saved. Please, try again.'));
@@ -124,7 +141,6 @@ class InternshipsStudentsController extends AppController
             $internshipsStudent = $this->InternshipsStudents->patchEntity($internshipsStudent, $this->request->getData());
             if ($this->InternshipsStudents->save($internshipsStudent)) {
                 $this->Flash->success(__('The internships student has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The internships student could not be saved. Please, try again.'));
@@ -142,7 +158,6 @@ class InternshipsStudentsController extends AppController
         } else {
             $this->Flash->error(__('The internships student could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }
