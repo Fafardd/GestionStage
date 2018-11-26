@@ -16,7 +16,7 @@ class CompaniesController extends AppController
     {
         //$action = $this->request->getParam('action');
 
-        if($user['category']==2){
+        if($user['category']==2||$user['category']==3){
             return true;
         } 
         // Par défaut, on refuse l'accès.

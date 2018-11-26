@@ -4,32 +4,23 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Mailer\Email;
 use Cake\Utility\Text;
-
-/**
- * Users Controller
- *
- * @property \App\Model\Table\UsersTable $Users
- *
- * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
 class UsersController extends AppController
 {
     public function isAuthorized($user)
     {
-        //$action = $this->request->getParam('action');
-
-        if($user['category'] == 3){
-            return true;
-        } 
-        // Par défaut, on refuse l'accès.
-        return false;
-    }
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
+		$action = $this->request->getParam('action');
+		// Toutes les autres actions nécessitent un slug
+		$userid = $user['id'];
+		if (!$userid) {
+			return false;
+		}
+		if ($this->Auth->user('category') == '3') {
+			return true;
+		}
+		$id = (int) $this->request->getParam('pass.0');
+		
+		return $id === $user['id'];
+	}
     public function login()
 {
     if ($this->request->is('post')) {
@@ -41,13 +32,11 @@ class UsersController extends AppController
         $this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
     }
 }
-
     public function initialize()
     {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);
     }
-    
     public function logout()
     {
         $this->Flash->success('Vous avez été déconnecté.');
@@ -59,14 +48,6 @@ class UsersController extends AppController
 
         $this->set(compact('users'));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
@@ -75,12 +56,6 @@ class UsersController extends AppController
 
         $this->set('user', $user);
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $user = $this->Users->newEntity();
@@ -97,14 +72,6 @@ class UsersController extends AppController
         }
         $this->set(compact('user'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
@@ -121,14 +88,6 @@ class UsersController extends AppController
         }
         $this->set(compact('user'));
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

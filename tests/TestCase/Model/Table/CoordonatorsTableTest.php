@@ -4,6 +4,9 @@ namespace App\Test\TestCase\Model\Table;
 use App\Model\Table\CoordonatorsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
+use Cake\Validation\Validator;
+
+
 
 /**
  * App\Model\Table\CoordonatorsTable Test Case
@@ -28,6 +31,8 @@ class CoordonatorsTableTest extends TestCase
         'app.users'
     ];
 
+    
+
     /**
      * setUp method
      *
@@ -40,6 +45,19 @@ class CoordonatorsTableTest extends TestCase
         $this->Coordonators = TableRegistry::getTableLocator()->get('Coordonators', $config);
     }
 
+    public function testValidateEmailFail () {
+        $coordonator = $this->Coordonators->find('all')->first()->toArray();
+        $coordonator['email'] = 'email.ca';
+        $errors = $this->Coordonators->validationDefault(new Validator())->errors($coordonator);
+        $this->assertTrue(!empty($errors['email']));
+    }
+
+    public function testValidatePhoneFail(){
+        $coordonator = $this->Coordonators->find('all')->first()->toArray();
+        $coordonator['phone'] = '12345678910';
+        $errors = $this->Coordonators->validationDefault(new Validator())->errors($coordonator);
+        $this->assertTrue(!empty($errors['phone']));
+    }
     /**
      * tearDown method
      *

@@ -1,20 +1,10 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
 use Cake\Mailer\Email;
 use Cake\Utility\Text;
-
-/**
- * InternshipsStudents Controller
- *
- * @property \App\Model\Table\InternshipsStudentsTable $InternshipsStudents
- *
- * @method \App\Model\Entity\InternshipsStudent[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- */
 class InternshipsStudentsController extends AppController
 {
-	
 	public function postuler($internshipid){
         $internshipsStudent = $this->InternshipsStudents->newEntity();
 		
@@ -72,53 +62,61 @@ class InternshipsStudentsController extends AppController
         $this->Flash->error(__('The internships application could not be saved. Please, try again.'));
         
     }
-
     public function isAuthorized($user)
     {
         //$action = $this->request->getParam('action');
-
-        if($user['category']== 1||$user['category']== 3){
+        if($user['category']== 1 || $user['category']== 2 || $user['category']== 3){
             return true;
         } 
         // Par défaut, on refuse l'accès.
         return false;
     }
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|void
-     */
     public function index()
-    {
-        $this->paginate = [
+    {	
+	
+	$this->paginate = [
             'contain' => ['Internships', 'Students']
         ];
+	
+		$this->loadModel("Students");
+		$Students = $this->Students->find()->where([true]);		
+		$this->loadModel('Internships');
+		$Internships = $this->Internships->find()->where([true]);		
         $internshipsStudents = $this->paginate($this->InternshipsStudents);
-
-        $this->set(compact('internshipsStudents'));
+		$actStudent;
+		$loggeduser = $this->request->getSession()->read('Auth.User');
+		if($loggeduser['category']==2){
+		$query = $this->Internships->find()->leftJoinWith('Companies')->where(['Companies.user_id'=>$loggeduser['id']]);
+        //$internships = $this->paginate($query);
+		}elseif($loggeduser['category']==1||$loggeduser['category']==3){
+			
+			foreach ($Students as $student){
+				if ($student->user_id == $loggeduser['id']) {
+					
+					
+					$actStudent = $student;
+					
+					break;
+					
+				}
+				
+			}
+			$internshipsStudents = $this->paginate($this->InternshipsStudents);
+		}
+		
+		$this->paginate = [
+            'contain' => ['Internships', 'Students']
+        ];
+		
+        $this->set(compact('internshipsStudents', 'query', 'actStudent', 'Internships'));
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Internships Student id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $internshipsStudent = $this->InternshipsStudents->get($id, [
             'contain' => ['Internships', 'Students']
         ]);
-
         $this->set('internshipsStudent', $internshipsStudent);
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
         $internshipsStudent = $this->InternshipsStudents->newEntity();
@@ -126,7 +124,6 @@ class InternshipsStudentsController extends AppController
             $internshipsStudent = $this->InternshipsStudents->patchEntity($internshipsStudent, $this->request->getData());
             if ($this->InternshipsStudents->save($internshipsStudent)) {
                 $this->Flash->success(__('The internships student has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The internships student could not be saved. Please, try again.'));
@@ -135,14 +132,6 @@ class InternshipsStudentsController extends AppController
         $students = $this->InternshipsStudents->Students->find('list', ['limit' => 200]);
         $this->set(compact('internshipsStudent', 'internships', 'students'));
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Internships Student id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
     public function edit($id = null)
     {
         $internshipsStudent = $this->InternshipsStudents->get($id, [
@@ -152,7 +141,6 @@ class InternshipsStudentsController extends AppController
             $internshipsStudent = $this->InternshipsStudents->patchEntity($internshipsStudent, $this->request->getData());
             if ($this->InternshipsStudents->save($internshipsStudent)) {
                 $this->Flash->success(__('The internships student has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The internships student could not be saved. Please, try again.'));
@@ -161,14 +149,6 @@ class InternshipsStudentsController extends AppController
         $students = $this->InternshipsStudents->Students->find('list', ['limit' => 200]);
         $this->set(compact('internshipsStudent', 'internships', 'students'));
     }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Internships Student id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
@@ -178,7 +158,6 @@ class InternshipsStudentsController extends AppController
         } else {
             $this->Flash->error(__('The internships student could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

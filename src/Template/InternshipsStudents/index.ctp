@@ -28,7 +28,27 @@
         <tbody>
             <?php foreach ($internshipsStudents as $internshipsStudent): ?>
             <tr>
+			<?php $loggeduser = $this->request->getSession()->read('Auth.User');
+					if($loggeduser['category']==2){
+				 foreach($query as $internship) {
+					if($internship['id'] == $internshipsStudent['internship_id']){?>
+						
+				
                 <td><?= $this->Number->format($internshipsStudent->id) ?></td>
+                <td><?= $internshipsStudent->has('internship') ? $this->Html->link($internshipsStudent->internship->title, ['controller' => 'Internships', 'action' => 'view', $internshipsStudent->internship->id]) : '' ?></td>
+                <td><?= $internshipsStudent->has('student') ? $this->Html->link($internshipsStudent->student->name, ['controller' => 'Students', 'action' => 'view', $internshipsStudent->student->id]) : '' ?></td>
+                 <td class="actions">
+                     <?= $this->Html->link(__('View'), ['action' => 'view', $internshipsStudent->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internshipsStudent->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $internshipsStudent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsStudent->id)]) ?>
+                </td>
+				
+					<?php  } }
+				}  else if ($loggeduser['category']==1){ 
+					if($actStudent->id == $internshipsStudent['student_id']){
+				?>
+				
+				<td><?= $this->Number->format($internshipsStudent->id) ?></td>
                 <td><?= $internshipsStudent->has('internship') ? $this->Html->link($internshipsStudent->internship->title, ['controller' => 'Internships', 'action' => 'view', $internshipsStudent->internship->id]) : '' ?></td>
                 <td><?= $internshipsStudent->has('student') ? $this->Html->link($internshipsStudent->student->name, ['controller' => 'Students', 'action' => 'view', $internshipsStudent->student->id]) : '' ?></td>
                 <td class="actions">
@@ -36,6 +56,17 @@
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internshipsStudent->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $internshipsStudent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsStudent->id)]) ?>
                 </td>
+				<?php }  } else { ?>
+				
+				<td><?= $this->Number->format($internshipsStudent->id) ?></td>
+                <td><?= $internshipsStudent->has('internship') ? $this->Html->link($internshipsStudent->internship->title, ['controller' => 'Internships', 'action' => 'view', $internshipsStudent->internship->id]) : '' ?></td>
+                <td><?= $internshipsStudent->has('student') ? $this->Html->link($internshipsStudent->student->name, ['controller' => 'Students', 'action' => 'view', $internshipsStudent->student->id]) : '' ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $internshipsStudent->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $internshipsStudent->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $internshipsStudent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $internshipsStudent->id)]) ?>
+                </td>
+				<?php } ?>
             </tr>
             <?php endforeach; ?>
         </tbody>

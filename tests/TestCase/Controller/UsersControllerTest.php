@@ -3,6 +3,7 @@ namespace App\Test\TestCase\Controller;
 
 use App\Controller\UsersController;
 use Cake\TestSuite\IntegrationTestCase;
+use Cake\ORM\TableRegistry;
 
 /**
  * App\Controller\UsersController Test Case
@@ -10,6 +11,14 @@ use Cake\TestSuite\IntegrationTestCase;
 class UsersControllerTest extends IntegrationTestCase
 {
 
+    public $Users;
+    
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->Users = TableRegistry::get('Users');
+    }
     /**
      * Fixtures
      *
@@ -49,7 +58,25 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        //$this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users/add');
+
+        //$this->assertReponseOk();
+
+        $data = [
+            'id' => 5,
+            'email' => 'email@email.com',
+            'password' => 'password',
+            'category' => 1
+        ];
+
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+        $this->post('/users/add', $data);
+
+        $this->assertResponseSuccess();
+        $query = $this->Users->find('all', ['conditions' => ['Users.id' => $data['id']]]);
+        $this->assertNotEmpty($query);
     }
 
     /**

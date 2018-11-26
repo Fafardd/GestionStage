@@ -52,17 +52,43 @@ class CompaniesFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'name' => 'Lorem ipsum dolor sit amet',
-                'address' => 'Lorem ipsum dolor sit amet',
-                'city' => 'Lorem ipsum dolor sit amet',
-                'province' => 'Lorem ipsum dolor sit amet',
-                'postal_code' => 'Lore',
-                'administrative_region' => 'Lorem ipsum dolor sit amet',
+                'name' => 'test1',
+                'address' => 'test1',
+                'city' => 'test1',
+                'province' => 'test1',
+                'postal_code' => 'test1',
+                'administrative_region' => 'test1',
                 'active' => 1,
-                'phone' => 'Lorem ips',
-                'email' => 'Lorem ipsum dolor sit amet',
+                'phone' => '1234567890',
+                'email' => 'test1@test1.com',
                 'user_id' => 1
             ],
+            [
+                'id' => 2,
+                'name' => 'test2',
+                'address' => 'test2',
+                'city' => 'test2',
+                'province' => 'test2',
+                'postal_code' => 'test2',
+                'administrative_region' => 'test2',
+                'active' => 1,
+                'phone' => '9876543210',
+                'email' => 'test2@test2.com',
+                'user_id' => 1
+            ],
+            [
+                'id' => 3,
+                'name' => 'test3',
+                'address' => 'test3',
+                'city' => 'test3',
+                'province' => 'test3',
+                'postal_code' => 'test3',
+                'administrative_region' => 'test3',
+                'active' => 0,
+                'phone' => '9876543210',
+                'email' => 'test3@test3.com',
+                'user_id' => 1
+            ]
         ];
         parent::init();
     }
