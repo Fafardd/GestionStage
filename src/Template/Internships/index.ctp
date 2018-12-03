@@ -22,6 +22,7 @@
         <li><?= $this->Html->link(__('Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>	
 		<li><?= $this->Html->link(__('New Internship'), ['action' => 'add']) ?></li>
+        
 			
 			<?}else if($loggeduser['category']==2){?>
 			
@@ -39,6 +40,9 @@
 					<li><?= $this->Html->link(__('Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?></li>
 					<li><?= $this->Html->link(__('Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
 					<li><?= $this->Html->link(__('Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
+
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Files'), ['controller' => 'Files', 'action' => 'add']) ?></li>
 					
 					<?}else{?>
 					

@@ -13,6 +13,8 @@
         <li><?= $this->Html->link(__('List Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Internships Student'), ['controller' => 'InternshipsStudents', 'action' => 'add']) ?></li>
 		<li><?= $this->Html->link(__('Etudiants sans stage'), ['controller' => 'Students', 'action' => 'etusansstage']) ?></li>
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Files'), ['controller' => 'Files', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="students index large-9 medium-8 columns content">
