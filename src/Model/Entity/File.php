@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $student_id
- * @property string $nomFichier
+ * @property string $name
  * @property string $pathFichier
  *
  * @property \App\Model\Entity\Student $student
@@ -27,7 +27,7 @@ class File extends Entity
      */
     protected $_accessible = [
         'student_id' => true,
-        'nomFichier' => true,
+        'name' => true,
         'pathFichier' => true,
         'student' => true
     ];

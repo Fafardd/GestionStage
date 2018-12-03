@@ -15,6 +15,7 @@
         <li><?= $this->Html->link(__('New Student'), ['controller' => 'Students', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
+
 <div class="files view large-9 medium-8 columns content">
     <h3><?= h($file->id) ?></h3>
     <table class="vertical-table">
@@ -23,8 +24,9 @@
             <td><?= $file->has('student') ? $this->Html->link($file->student->name, ['controller' => 'Students', 'action' => 'view', $file->student->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('NomFichier') ?></th>
-            <td><?= h($file->nomFichier) ?></td>
+            <th scope="row"><?= __('Name') ?></th>
+            <td><?= $this->Html->link(h($file->name), '/webroot/img/Files/' . $file->name) ?></td>
+            <!-- webroot/img/Files/420-3B5_tp_synthese.pdf -->
         </tr>
         <tr>
             <th scope="row"><?= __('PathFichier') ?></th>

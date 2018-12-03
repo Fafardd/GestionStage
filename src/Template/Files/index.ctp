@@ -19,7 +19,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('student_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('nomFichier') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('pathFichier') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -27,15 +27,28 @@
         <tbody>
             <?php foreach ($files as $file): ?>
             <tr>
+            <?php 
+                $loggeduser = $this->request->getSession()->read('Auth.User');
+                foreach ($Students as $student):
+
+                    /*debug($loggeduser['id']);
+                    debug($student['user_id']);
+                    debug($student['id']);
+                    debug($file['student_id']);
+                    die();*/
+                if($loggeduser['id'] == $student['user_id'] && $student['id']== $file['student_id']){
+            ?>
                 <td><?= $this->Number->format($file->id) ?></td>
                 <td><?= $file->has('student') ? $this->Html->link($file->student->name, ['controller' => 'Students', 'action' => 'view', $file->student->id]) : '' ?></td>
-                <td><?= h($file->nomFichier) ?></td>
+                <td><?= h($file->name) ?></td>
                 <td><?= h($file->pathFichier) ?></td>
+                
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $file->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $file->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $file->id], ['confirm' => __('Are you sure you want to delete # {0}?', $file->id)]) ?>
                 </td>
+                <?php } endforeach;?>
             </tr>
             <?php endforeach; ?>
         </tbody>

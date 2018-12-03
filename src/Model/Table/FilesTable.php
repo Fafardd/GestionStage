@@ -56,10 +56,10 @@ class FilesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('nomFichier')
-            ->maxLength('nomFichier', 255)
-            ->requirePresence('nomFichier', 'create')
-            ->notEmpty('nomFichier');
+            ->scalar('name')
+            ->maxLength('name', 255)
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
             ->scalar('pathFichier')

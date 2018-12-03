@@ -12,16 +12,8 @@ use App\Controller\AppController;
  */
 class FilesController extends AppController
 {
-
-    public function isAuthorized($user)
-    {
-        //$action = $this->request->getParam('action');
-
-        if($user['category']==2||$user['category']==3){
-            return true;
-        } 
-        // Par défaut, on refuse l'accès.
-        return false;
+    public function isAuthorized($user) {
+        return true;
     }
     /**
      * Index method
@@ -30,12 +22,12 @@ class FilesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Students']
-        ];
+        
+        $this->loadModel("Students");
+		$Students = $this->Students->find()->where([true]);
         $files = $this->paginate($this->Files);
 
-        $this->set(compact('files'));
+        $this->set(compact('files', 'Students'));
     }
 
     /**
@@ -59,7 +51,7 @@ class FilesController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    /*ublic function add()
     {
         $file = $this->Files->newEntity();
         if ($this->request->is('post')) {
@@ -73,7 +65,96 @@ class FilesController extends AppController
         }
         $students = $this->Files->Students->find('list', ['limit' => 200]);
         $this->set(compact('file', 'students'));
+    }*/
+
+    public function add() {
+        //5mb max
+        
+        
+        if ($this->request->is('post')) {
+            /*debug($this->request->data['name']);
+                die();*/
+                
+                for ($i = 0; $i< count($this->request->data['name']); $i++){
+                    $file = $this->Files->newEntity();
+                
+                
+            if (!empty($this->request->data['name'][$i]['name'])) {
+                $fileName = $this->request->data['name'][$i]['name'];
+                $uploadPath = 'Files/';
+                $uploadFile = $uploadPath . $fileName;
+
+                //$this->log($this->request->data);
+                
+                if (move_uploaded_file($this->request->data['name'][$i]['tmp_name'], 'img/' . $uploadFile)) {
+
+                    $file = $this->Files->patchEntity($file, $this->request->getData());
+                    $file->name = $fileName;
+                    $file->path = $uploadPath;
+
+                    
+                    if(strpos($file->name, "docx") !== false || strpos($file->name, "pdf") !== false){
+
+                        
+                       if($this->request->data['name'][$i]['size'] > 5000){
+
+                        
+                    
+                            if ($this->Files->save($file)) {
+                                $this->Flash->success(__('File has been uploaded and inserted successfully.'));
+                                return $this->redirect(['action' => 'index']);
+                            } else {
+                                $this->Flash->error(__('Unable to upload file, please try again.'));
+                            }
+
+                        }else {
+                            $this->Flash->error(__('File too big'));
+                        }   
+
+                    }else {
+                        $this->Flash->error(__('Wrong type'));
+                    }
+                } else {
+                    $this->Flash->error(__('Unable to save file, please try again.'));
+                }
+            } else {
+                $this->Flash->error(__('Please choose a file to upload.'));
+            }
+        }
+        }
+        $students = $this->Files->Students->find('list', ['limit' => 200]);
+        $this->set(compact('file', 'students'));
     }
+
+    /*public function openFile($id = null){
+        $file = $this->Files->get($id, [
+            'contain' => []
+        ]);;
+
+        $fileName = $file->name;
+        $uploadPath = 'Files/';
+        $uploadFile = $uploadPath . $fileName;
+
+        $path = 'img/' . $uploadFile;
+
+
+        $size = filesize($path);
+        header('Content-Type: application/octet-stream');
+        header('Content-Length: '.$size);
+        header('Content-Disposition: attachment; filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        debug($path);
+        
+        fopen($path . $fileName, 'r');
+
+        
+
+        fpassthru($file);
+        exit;
+        
+        
+
+    }*/
 
     /**
      * Edit method
