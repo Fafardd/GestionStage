@@ -20,7 +20,7 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('student_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('pathFichier') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('Description') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -39,7 +39,9 @@
                 if($loggeduser['id'] == $student['user_id'] && $student['id']== $file['student_id']){
             ?>
                 <td><?= $this->Number->format($file->id) ?></td>
-                <td><?= $file->has('student') ? $this->Html->link($file->student->name, ['controller' => 'Students', 'action' => 'view', $file->student->id]) : '' ?></td>
+                <!--<td><?= $file->has('student') ? $this->Html->link($file->student->name, ['controller' => 'Students', 'action' => 'view', $file->student->id]) : '' ?></td>
+                -->
+                <td><?= h($student['name']) ?></td>
                 <td><?= h($file->name) ?></td>
                 <td><?= h($file->pathFichier) ?></td>
                 

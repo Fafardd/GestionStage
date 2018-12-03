@@ -19,7 +19,7 @@
         <?php
             echo $this->Form->control('student_id', ['options' => $students]);
             echo $this->Form->control('name', ['name' => 'name[]', 'type' => 'file', 'multiple' => 'multiple']);
-            echo $this->Form->control('pathFichier');
+            echo $this->Form->control('pathFichier', ['label' => 'Description']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -29,7 +29,7 @@
             <!-- webroot/img/Files/420-3B5_tp_synthese.pdf -->
         </tr>
         <tr>
-            <th scope="row"><?= __('PathFichier') ?></th>
+            <th scope="row"><?= __('Description') ?></th>
             <td><?= h($file->pathFichier) ?></td>
         </tr>
         <tr>
