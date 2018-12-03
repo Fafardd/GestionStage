@@ -24,7 +24,7 @@
         <legend><?= __('Edit File') ?></legend>
         <?php
             echo $this->Form->control('student_id', ['options' => $students]);
-            echo $this->Form->control('nomFichier');
+            echo $this->Form->control('name');
             echo $this->Form->control('pathFichier');
         ?>
     </fieldset>

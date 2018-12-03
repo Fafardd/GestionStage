@@ -13,13 +13,13 @@
     </ul>
 </nav>
 <div class="files form large-9 medium-8 columns content">
-    <?= $this->Form->create($file) ?>
+    <?= $this->Form->create($file, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Add File') ?></legend>
         <?php
             echo $this->Form->control('student_id', ['options' => $students]);
-            echo $this->Form->control('nomFichier');
-            echo $this->Form->control('pathFichier');
+            echo $this->Form->control('name', ['name' => 'name[]', 'type' => 'file', 'multiple' => 'multiple']);
+            echo $this->Form->control('pathFichier', ['label' => 'Description']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
