@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Companies Controller
@@ -83,13 +84,30 @@ class CompaniesController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
-    {
+    {	
         $company = $this->Companies->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $company = $this->Companies->patchEntity($company, $this->request->getData());
             if ($this->Companies->save($company)) {
+				
+				$this->loadModel('updated_companies');
+				$updated_companies = $this->paginate($this->updated_companies);	
+				
+				foreach ($updated_companies as $updated_companie){
+					if ($updated_companie->companies_id == $id) {
+						
+						$Updated = TableRegistry::get('updated_companies');
+						$_updated_companie = $Updated->get($updated_companie->id);
+
+						$_updated_companie->days_not_updated = -1;
+						$Updated->save($_updated_companie);
+						
+						$this->Flash->success(__('Thank you for updating your company.'));
+					}
+				}
+				
                 $this->Flash->success(__('The company has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
