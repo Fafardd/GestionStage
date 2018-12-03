@@ -12,11 +12,11 @@
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Internships Student'), ['controller' => 'InternshipsStudents', 'action' => 'add']) ?></li>
-		<li><?= $this->Html->link(__('Etudiants sans stage'), ['controller' => 'Students', 'action' => 'etusansstage']) ?></li>
+		
     </ul>
 </nav>
 <div class="students index large-9 medium-8 columns content">
-    <h3><?= __('Students') ?></h3>
+    <h3><?= __('Students Sans Stage') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -32,7 +32,13 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($students as $student): ?>
+            <?php foreach ($students as $student) {
+					
+					
+					if ($student->aUnStage == 0) {
+						
+			
+			?>
             <tr>
                 <td><?= $this->Number->format($student->id) ?></td>
                 <td><?= h($student->name) ?></td>
@@ -48,7 +54,7 @@
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $student->id], ['confirm' => __('Are you sure you want to delete # {0}?', $student->id)]) ?>
                 </td>
             </tr>
-            <?php endforeach; ?>
+					<?php } } ?>
         </tbody>
     </table>
     <div class="paginator">
