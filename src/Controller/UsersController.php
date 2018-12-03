@@ -23,11 +23,68 @@ class UsersController extends AppController
 	}
     public function login()
 	{
+		$url = '';
 		if ($this->request->is('post')) {
 			$user = $this->Auth->identify();
 			if ($user) {
 				$this->Auth->setUser($user);
-				return $this->redirect($this->Auth->redirectUrl());
+				if($user['category']==3){
+				$url = '/Internships/';
+			}else if($user['category']==2){
+				
+				$url = '/companies/add/';
+				
+				$this->loadModel('companies');
+				
+				$companies = $this->paginate($this->companies);
+				
+								foreach($companies as $companies){
+					
+					if($companies['user_id']==$user['id']){
+						
+						$url = '/Internships-students/';
+						
+						$this->loadModel('updated_companies');
+				
+				$updated_companies = $this->paginate($this->updated_companies);
+				
+				foreach($updated_companies as $updated_companies){
+					
+					if($updated_companies['companies_id']==$companies['id']){
+						
+						if($updated_companies['days_not_updated'] !=-1){
+						
+							$url = '/companies/edit/' + $companies['id'];
+						}
+						
+					}
+					
+				}
+						
+					
+					
+					break;
+					}
+				}
+				
+				
+			} else if($user['category']==1){
+				
+				$url = '/students/add/';
+				
+				$this->loadModel('students');
+				
+				$students = $this->paginate($this->students);
+				
+				foreach($students as $students){
+					
+					if($students['user_id']==$user['id']){}
+					$url = '/Internships/';
+					break;
+				}
+				
+			}
+            return $this->redirect($this->Auth->redirectUrl($url));
 			}
 			$this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
 		}

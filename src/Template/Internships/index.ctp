@@ -6,18 +6,49 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Internship'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Company'), ['controller' => 'Companies', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Types'), ['controller' => 'Types', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Type'), ['controller' => 'Types', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internships Customerbase'), ['controller' => 'InternshipsCustomerbases', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internships Environment'), ['controller' => 'InternshipsEnvironments', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Internships Student'), ['controller' => 'InternshipsStudents', 'action' => 'add']) ?></li>
+        <?$loggeduser = $this->request->getSession()->read('Auth.User');?>
+		
+		<? if($loggeduser['category']==3){?>
+		
+        <li><?= $this->Html->link(__('Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
+		<li><?= $this->Html->link(__('Coordonators'), ['controller' => 'Coordonators', 'action' => 'index']) ?></li>
+		<li><?= $this->Html->link(__('Customerbases'), ['controller' => 'Customerbases', 'action' => 'index']) ?></li>
+		<li><?= $this->Html->link(__('Environments'), ['controller' => 'Environments', 'action' => 'index']) ?></li>
+		<li><?= $this->Html->link(__('Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
+		<li><?= $this->Html->link(__('Students'), ['controller' => 'Students', 'action' => 'index']) ?></li>
+		<li><?= $this->Html->link(__('Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Types'), ['controller' => 'Types', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>	
+		<li><?= $this->Html->link(__('New Internship'), ['action' => 'add']) ?></li>
+			
+			<?}else if($loggeduser['category']==2){?>
+			
+				<li><?= $this->Html->link(__('Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
+				<li><?= $this->Html->link(__('Types'), ['controller' => 'Types', 'action' => 'index']) ?></li>
+				<li><?= $this->Html->link(__('Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?></li>
+				<li><?= $this->Html->link(__('Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
+				<li><?= $this->Html->link(__('Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
+				<li><?= $this->Html->link(__('New Internship'), ['action' => 'add']) ?></li>
+				
+				<?}else if($loggeduser['category']==1){?>
+				
+					<li><?= $this->Html->link(__('Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
+					<li><?= $this->Html->link(__('Types'), ['controller' => 'Types', 'action' => 'index']) ?></li>
+					<li><?= $this->Html->link(__('Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?></li>
+					<li><?= $this->Html->link(__('Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
+					<li><?= $this->Html->link(__('Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
+					
+					<?}else{?>
+					
+						<li><?= $this->Html->link(__('Companies'), ['controller' => 'Companies', 'action' => 'index']) ?></li>
+						<li><?= $this->Html->link(__('Types'), ['controller' => 'Types', 'action' => 'index']) ?></li>
+						<li><?= $this->Html->link(__('Internships Customerbases'), ['controller' => 'InternshipsCustomerbases', 'action' => 'index']) ?></li>
+						<li><?= $this->Html->link(__('Internships Environments'), ['controller' => 'InternshipsEnvironments', 'action' => 'index']) ?></li>
+						<li><?= $this->Html->link(__('Internships Students'), ['controller' => 'InternshipsStudents', 'action' => 'index']) ?></li>
+						
+					<?}?>
     </ul>
 </nav>
 <div class="internships index large-9 medium-8 columns content">
