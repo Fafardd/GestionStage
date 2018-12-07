@@ -22,7 +22,9 @@ class FilesController extends AppController
      */
     public function index()
     {
-        
+        $this->paginate = [
+            'contain' => ['Students']
+        ];
         $this->loadModel("Students");
 		$Students = $this->Students->find()->where([true]);
         $files = $this->paginate($this->Files);
